@@ -1,3 +1,17 @@
+.logs-section .ant-layout-sider-children {
+  background: white;
+}
+
 .logs-section .skeletons {
   padding: 20px;
+}
+
+.log-detail {
+  padding: 0;
+}
+
+.log-detail .log-code {
+  padding: 15px;
+  background: black;
+  color: white;
 }
