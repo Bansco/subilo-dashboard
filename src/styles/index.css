@@ -1,0 +1,14 @@
+@import '~antd/dist/antd.css';
+/* @import '~antd/dist/antd.dark.css'; */
+
+.ant-layout-has-sider {
+  height: calc(100vh - 64px);
+}
+
+.ant-layout-content {
+  padding: 20px;
+}
+
+.ant-layout-sider-children {
+  overflow: scroll;
+}
