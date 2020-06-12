@@ -36,9 +36,9 @@ export default  function Logs() {
           style={{ height: '100%', borderRight: 0 }}
         >
           {
-            data ? data.map(({id, title}) => (
-              <Menu.Item key={id} icon={<AlignLeftOutlined />}>
-                <Link to={`/logs/${id}`}>{title}</Link>
+            data ? data.map(({id: logID , title}) => (
+              <Menu.Item key={logID} icon={<AlignLeftOutlined />}>
+                <Link to={`/logs/${logID}`}>Log {logID}</Link>
               </Menu.Item>
             )) : (
               <div className="skeletons">
