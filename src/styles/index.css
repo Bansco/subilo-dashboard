@@ -1,6 +1,10 @@
 @import '~antd/dist/antd.css';
 /* @import '~antd/dist/antd.dark.css'; */
 
+* {
+  font-family: Avenir,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,noto sans,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol,noto color emoji,sans-serif;
+}
+
 .ant-layout-has-sider {
   height: calc(100vh - 64px);
 }

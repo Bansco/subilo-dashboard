@@ -1,0 +1,25 @@
+.ant-layout-header {
+  display: flex;
+  background: white;
+  box-shadow: 0 0 3px 0 rgba(0,0,0,.15);
+  z-index: 10;
+}
+
+.ant-layout-header .ant-menu-horizontal {
+  border-bottom: 0;
+}
+
+.ant-layout-header .ant-menu-horizontal .ant-menu-item {
+  top: 0;
+}
+
+.logo {
+  width: 150px;
+  text-align: center;
+  padding-right: 50px;
+}
+
+.logo h2 {
+  color: #1890ff;
+  margin: 0;
+}
