@@ -1,16 +1,16 @@
-.logs-section .ant-layout-sider-children {
+.jobs-section .ant-layout-sider-children {
   background: #fafafa;
 }
 
-.logs-section .skeletons {
+.jobs-section .skeletons {
   padding: 20px;
 }
 
-.log-detail {
+.job-detail {
   padding: 0;
 }
 
-.log-detail .log-code {
+.job-detail .job-code {
   padding: 15px;
   background: black;
   color: white;

@@ -15,7 +15,7 @@ const { Header } = Layout;
 export default function CustomHeader() {
   const location = useLocation()
   const pathname = location.pathname;
-  const selectedKeys = pathname.includes('/logs') ? '/logs' : pathname;
+  const selectedKeys = pathname.includes('/jobs') ? '/jobs' : pathname;
 
  return (
   <Header className="header">
@@ -28,8 +28,8 @@ export default function CustomHeader() {
       <Menu.Item key="/">
         <Link to="/">Home</Link>
       </Menu.Item>
-      <Menu.Item key="/logs">
-        <Link to="/logs">Logs</Link>
+      <Menu.Item key="/jobs">
+        <Link to="/jobs">Jobs</Link>
       </Menu.Item>
     </Menu>
   </Header>

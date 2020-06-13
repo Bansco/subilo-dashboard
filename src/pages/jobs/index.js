@@ -20,7 +20,7 @@ import './index.css';
 
 const { Sider, Content } = Layout;
 
-export default  function Logs() {
+export default  function Jobs() {
   const { id } = useParams();
 
   const { data } = useRequest({
@@ -28,7 +28,7 @@ export default  function Logs() {
   })
 
   return (
-    <Layout className="logs-section">
+    <Layout className="jobs-section">
       <Sider width={200} className="site-layout-background">
         <Menu
           mode="inline"
@@ -36,9 +36,9 @@ export default  function Logs() {
           style={{ height: '100%', borderRight: 0 }}
         >
           {
-            data ? data.map(({id: logID , title}) => (
-              <Menu.Item key={logID} icon={<AlignLeftOutlined />}>
-                <Link to={`/logs/${logID}`}>Log {logID}</Link>
+            data ? data.map(({id: JobID , title}) => (
+              <Menu.Item key={JobID} icon={<AlignLeftOutlined />}>
+                <Link to={`/jobs/${JobID}`}>Job {JobID}</Link>
               </Menu.Item>
             )) : (
               <div className="skeletons">
@@ -51,7 +51,7 @@ export default  function Logs() {
         </Menu>
       </Sider>
 
-      {id && <LogDetail id={id} />}
+      {id && <JobDetail id={id} />}
       {!id && <Content><Empty className="center" description={false}/></Content>}
     </Layout>
   )
@@ -59,15 +59,15 @@ export default  function Logs() {
 
 
 
-function LogDetail({ id }) {
+function JobDetail({ id }) {
   const { data } = useRequest({
     url: `https://jsonplaceholder.typicode.com/posts/${id}`
   })
 
   return (
-    <Content className="log-detail">
+    <Content className="job-detail">
       {data && (
-        <Layout className="log-code">
+        <Layout className="job-code">
           <code>
             Project gillchristian/tsplay.dev on branch master at ~/www/tsplay.dev/server<br/>
             $ git pull --rebase<br/>

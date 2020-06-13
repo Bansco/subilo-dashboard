@@ -8,7 +8,7 @@ import {
 
 import TopHeader from './components/TopHeader';
 import Home from './pages/home'
-import Logs from './pages/logs'
+import Jobs from './pages/jobs'
 
 
 export default function App() {
@@ -18,8 +18,8 @@ export default function App() {
         <TopHeader/>
 
         <Switch>
-          <Route path="/logs/:id?">
-            <Logs />
+          <Route path="/jobs/:id?">
+            <Jobs />
           </Route>
           <Route path="/">
             <Home />
