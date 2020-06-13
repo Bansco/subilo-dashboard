@@ -1,9 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Layout,
-  Skeleton,
-  Empty,
-  Spin,
   Button,
   Table,
   Tag,
@@ -17,16 +14,24 @@ import {
   DeleteOutlined,
   PlusOutlined
 } from '@ant-design/icons';
+import {
+  useRecoilValue,
+  useSetRecoilState
+ } from 'recoil';
+import { agentsState } from '../../store'
 
 import './index.css';
 
-const { Content } = Layout;
-
 export default function Agents() {
   const [isAgentDetailVisible, setIsAgentDetailVisible] = useState(false);
+  const setAgents = useSetRecoilState(agentsState)
+  const agents = useRecoilValue(agentsState);
 
   function onSubmit(agent) {
-    console.log(agent)
+    setAgents((oldAgents) => [
+      ...oldAgents,
+      agent
+    ])
     hideAgentDetail();
   }
 
@@ -74,23 +79,15 @@ export default function Agents() {
     },
   ];
 
-  const data = [
-    {
-      key: '1',
-      name: 'VM Amazon',
-      status: ['online'],
-    },
-    {
-      key: '2',
-      name: 'VM Google',
-      status: ['offline'],
-    },
-  ];
-
+  const data = agents.map((agent, index) => ({
+    key: index,
+    name: agent.name,
+    status: ['online']
+  }));
 
   return (
     <Layout className="agents-section">
-      <Content>
+      <Layout.Content>
       <div className="section-actions">
         <Button
           type="primary"
@@ -110,14 +107,19 @@ export default function Agents() {
         onSubmit={onSubmit}
         onClose={hideAgentDetail}
       />
-      </Content>
+      </Layout.Content>
     </Layout>
   )
 }
 
 function AgentDetail({ id, isVisible, onSubmit, onClose }) {
+  const [form] = Form.useForm()
   const [agent, setAgent] = useState({});
   const isCreate = !id;
+
+  useEffect(() => {
+    form.resetFields();
+  }, [form, isVisible])
 
   function onChange(change) {
     setAgent({
@@ -151,9 +153,17 @@ function AgentDetail({ id, isVisible, onSubmit, onClose }) {
       }
     >
       <Form
+        form={form}
         layout={'vertical'}
         onValuesChange={onChange}
       >
+        <Form.Item
+          label="Name"
+          name="name"
+          rules={[{ required: true, message: 'Please, complete the name' }]}
+        >
+          <Input />
+        </Form.Item>
         <Form.Item
           label="URL"
           name="url"
