@@ -28,6 +28,9 @@ export default function CustomHeader() {
       <Menu.Item key="/">
         <Link to="/">Home</Link>
       </Menu.Item>
+      <Menu.Item key="/agents">
+        <Link to="/agents">Agents</Link>
+      </Menu.Item>
       <Menu.Item key="/jobs">
         <Link to="/jobs">Jobs</Link>
       </Menu.Item>

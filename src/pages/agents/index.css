@@ -1,0 +1,19 @@
+.agents-section .new-agent-button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: #fafafa;
+}
+
+.agents-section .ant-layout-sider-children {
+  background: #fafafa;
+}
+
+.agents-section .skeletons {
+  padding: 20px;
+}
+
+.agent-detail {
+  padding: 0;
+}
