@@ -5,12 +5,20 @@
   font-family: Avenir,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,noto sans,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol,noto color emoji,sans-serif;
 }
 
+#root {
+  height: 100vh;
+}
+
+.ant-layout {
+  height: 100%;
+}
+
 .ant-layout-has-sider {
   height: calc(100vh - 64px);
 }
 
 .ant-layout-content {
-  padding: 20px;
+  padding: 20px 50px;
 }
 
 .ant-layout-sider-children {
@@ -22,4 +30,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.section-actions {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.section-actions .ant-btn {
+  margin-left: auto;
 }
