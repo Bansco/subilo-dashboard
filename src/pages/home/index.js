@@ -1,5 +1,9 @@
 import React from 'react';
 
 export default function Home() {
-  return null
+  return (
+    <div className="center">
+      <h1>TRESH</h1>
+    </div>
+  )
 }
