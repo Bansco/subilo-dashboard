@@ -25,7 +25,6 @@ import './index.css';
 export default function Agents() {
   const [isAgentDetailVisible, setIsAgentDetailVisible] = useState(false);
   const setAgents = useSetRecoilState(agentsState)
-  const agents = useRecoilValue(agentsState);
 
   function onSubmit(agent) {
     setAgents((oldAgents) => [
@@ -39,6 +38,32 @@ export default function Agents() {
     setIsAgentDetailVisible(false);
   }
 
+  return (
+    <Layout className="agents-section">
+      <Layout.Content>
+      <div className="section-actions">
+        <Button
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={() => setIsAgentDetailVisible(true)}
+        >
+          New Agent
+        </Button>
+      </div>
+      <AgentsList />
+      <AgentDetail
+        isVisible={isAgentDetailVisible}
+        onSubmit={onSubmit}
+        onClose={hideAgentDetail}
+      />
+      </Layout.Content>
+    </Layout>
+  )
+}
+
+function AgentsList() {
+  const agents = useRecoilValue(agentsState);
+
   const columns = [
     {
       title: 'Name',
@@ -46,9 +71,9 @@ export default function Agents() {
       key: 'name',
     },
     {
-      title: 'Last Log Date',
-      dataIndex: 'lastLogDate',
-      key: 'lastLogDate',
+      title: 'Last Update',
+      dataIndex: 'lastUpdate',
+      key: 'lastUpdate',
     },
     {
       title: 'Status',
@@ -86,29 +111,11 @@ export default function Agents() {
   }));
 
   return (
-    <Layout className="agents-section">
-      <Layout.Content>
-      <div className="section-actions">
-        <Button
-          type="primary"
-          icon={<PlusOutlined />}
-          onClick={() => setIsAgentDetailVisible(true)}
-        >
-          New Agent
-        </Button>
-      </div>
-      <Table
-        pagination={false}
-        columns={columns}
-        dataSource={data}
-      />
-      <AgentDetail
-        isVisible={isAgentDetailVisible}
-        onSubmit={onSubmit}
-        onClose={hideAgentDetail}
-      />
-      </Layout.Content>
-    </Layout>
+    <Table
+      pagination={false}
+      columns={columns}
+      dataSource={data}
+    />
   )
 }
 
