@@ -4,11 +4,11 @@ import {
   Menu,
   Skeleton,
   Empty,
-  Spin
+  Spin,
 } from 'antd';
 import {
   Link,
-  useParams
+  useParams,
 } from "react-router-dom";
 import useRequest from '../../util/useRequest'
 import {
@@ -20,17 +20,38 @@ import {
  } from 'recoil';
 import {
   agentsState,
+  getAgent,
 } from '../../store'
 
 import './index.css';
 
 export default  function Jobs() {
   const agents = useRecoilValue(agentsState);
-  const { id } = useParams();
+  const { agentID, logID } = useParams();
 
-  const agent = agents[0];
+  return (
+    <Layout className="jobs-section">
+      <Layout.Sider width={300} className="site-layout-background">
+        <Menu
+          mode="inline"
+          selectedKeys={[`${agentID}-${logID}`]}
+          defaultOpenKeys={[agentID]}
+          style={{ height: '100%', borderRight: 0 }}
+        >
+          {agents.map((agent) => (
+            <AgentSubMenu key={agent.id} agent={agent}/>
+          ))}
+        </Menu>
+      </Layout.Sider>
 
-  const { data } = useRequest({
+      {agents && logID && <LogDetail agentID={agentID} logID={logID.replace('.log', '')} />}
+      {(!agentID || !logID) && <Layout.Content><Empty className="center" description={false}/></Layout.Content>}
+    </Layout>
+  )
+}
+
+function AgentSubMenu({ agent, ...rest }) {
+  const { data: logs } = useRequest({
     request: {
       url: `${agent.url}/logs`,
       headers: {
@@ -39,42 +60,31 @@ export default  function Jobs() {
     }
   })
 
-  return (
-    <Layout className="jobs-section">
-      <Layout.Sider width={300} className="site-layout-background">
-        <Menu
-          mode="inline"
-          selectedKeys={[id]}
-          style={{ height: '100%', borderRight: 0 }}
-        >
-          {
-            data ? data.map((logName) => (
-              <Menu.Item key={logName} icon={<AlignLeftOutlined />}>
-                <Link to={`/jobs/${logName}`}>{logName}</Link>
-              </Menu.Item>
-            )) : (
-              <div className="skeletons">
-              <Skeleton active/>
-              <Skeleton active/>
-              <Skeleton active/>
-            </div>
-            )
-          }
-        </Menu>
-      </Layout.Sider>
+  if (!logs) {
+    return (
+      <div className="skeletons">
+        <Skeleton active/>
+      </div>
+    );
+  }
 
-      {id && <JobDetail agent={agent} id={id.replace('.log', '')} />}
-      {!id && <Layout.Content><Empty className="center" description={false}/></Layout.Content>}
-    </Layout>
+  return (
+    <Menu.SubMenu {...rest} key={agent.id} icon={<AlignLeftOutlined />} title={agent.name}>
+      {logs.map(log => (
+        <Menu.Item key={`${agent.id}-${log}`}>
+          <Link to={`/jobs/${agent.id}/${log}`}>{log}</Link>
+        </Menu.Item>
+      ))}
+    </Menu.SubMenu>
   )
 }
 
+function LogDetail({ agentID, logID }) {
+  const agent = useRecoilValue(getAgent(agentID));
 
-
-function JobDetail({ agent, id }) {
   const { data } = useRequest({
     request: {
-      url: `${agent.url}/logs/${id}`,
+      url: `${agent.url}/logs/${logID}`,
       headers: {
         Authorization: `Bearer ${agent.token}`
       }

@@ -23,7 +23,7 @@ export default function App() {
             <Route path="/agents/:id?">
               <Agents />
             </Route>
-            <Route path="/jobs/:id?">
+            <Route path="/jobs/:agentID?/:logID?">
               <Jobs />
             </Route>
             <Route path="/">
