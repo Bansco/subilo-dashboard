@@ -10,6 +10,9 @@ import {
   Input
 } from 'antd';
 import {
+  useParams
+} from "react-router-dom";
+import {
   EditOutlined,
   DeleteOutlined,
   PlusOutlined
@@ -18,24 +21,50 @@ import {
   useRecoilValue,
   useSetRecoilState
  } from 'recoil';
-import { agentsState } from '../../store'
+import {
+  agentsState,
+  getAgent,
+} from '../../store'
 
 import './index.css';
 
 export default function Agents() {
-  const [isAgentDetailVisible, setIsAgentDetailVisible] = useState(false);
+  const { id } = useParams();
+  const [isAgentDetailVisible, setIsAgentDetailVisible] = useState(!!id);
+  const [selectedID, setSelectedID] = useState(id);
   const setAgents = useSetRecoilState(agentsState)
 
-  function onSubmit(agent) {
-    setAgents((oldAgents) => [
-      ...oldAgents,
-      agent
-    ])
+  useEffect(() => {
+    if (selectedID) {
+      setIsAgentDetailVisible(true);
+    }
+  }, [selectedID])
+
+  function onSubmit(agentToSave) {
+    setAgents((oldAgents) => {
+      if (agentToSave.id) {
+        return oldAgents.map(agent => {
+          if (agent.id === agentToSave.id) {
+            return agentToSave
+          }
+          return agent;
+        })
+      }
+
+      return [
+        ...oldAgents,
+        {
+          ...agentToSave,
+          id: getRandomID()
+        }
+      ]
+    })
     hideAgentDetail();
   }
 
   function hideAgentDetail() {
     setIsAgentDetailVisible(false);
+    setSelectedID(null);
   }
 
   return (
@@ -50,8 +79,9 @@ export default function Agents() {
           New Agent
         </Button>
       </div>
-      <AgentsList />
+      <AgentsList setSelectedID={setSelectedID} />
       <AgentDetail
+        id={selectedID}
         isVisible={isAgentDetailVisible}
         onSubmit={onSubmit}
         onClose={hideAgentDetail}
@@ -61,10 +91,15 @@ export default function Agents() {
   )
 }
 
-function AgentsList() {
+function AgentsList({ setSelectedID }) {
   const agents = useRecoilValue(agentsState);
 
   const columns = [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+      key: 'id',
+    },
     {
       title: 'Name',
       dataIndex: 'name',
@@ -97,7 +132,12 @@ function AgentsList() {
       key: 'action',
       render: (text, record) => (
         <Space size="middle">
-          <Button shape="circle" type="primary" icon={<EditOutlined />}/>
+          <Button
+            shape="circle"
+            type="primary"
+            icon={<EditOutlined />}
+            onClick={() => setSelectedID(record.id)}
+          />
           <Button shape="circle" type="primary" icon={<DeleteOutlined />}/>
         </Space>
       ),
@@ -106,6 +146,7 @@ function AgentsList() {
 
   const data = agents.map((agent, index) => ({
     key: index,
+    id: agent.id,
     name: agent.name,
     status: ['online']
   }));
@@ -120,6 +161,7 @@ function AgentsList() {
 }
 
 function AgentDetail({ id, isVisible, onSubmit, onClose }) {
+  const savedAgent = useRecoilValue(getAgent(id));
   const [form] = Form.useForm()
   const [agent, setAgent] = useState({});
   const isCreate = !id;
@@ -135,7 +177,14 @@ function AgentDetail({ id, isVisible, onSubmit, onClose }) {
     })
   }
 
-  const title = isCreate ? 'Create new agent' : 'Update agent';
+  function saveAgent() {
+    onSubmit({
+      ...(savedAgent || {}),
+      ...agent
+    })
+  }
+
+  const title = isCreate ? 'Create new agent' : `Update "${savedAgent.name}"`;
 
   return (
     <Drawer
@@ -153,7 +202,7 @@ function AgentDetail({ id, isVisible, onSubmit, onClose }) {
           <Button onClick={onClose} style={{ marginRight: 8 }}>
             Cancel
           </Button>
-          <Button onClick={() => onSubmit(agent)} type="primary">
+          <Button onClick={saveAgent} type="primary">
             Submit
           </Button>
         </div>
@@ -162,6 +211,7 @@ function AgentDetail({ id, isVisible, onSubmit, onClose }) {
       <Form
         form={form}
         layout={'vertical'}
+        initialValues={savedAgent}
         onValuesChange={onChange}
       >
         <Form.Item
@@ -189,4 +239,8 @@ function AgentDetail({ id, isVisible, onSubmit, onClose }) {
       </Form>
     </Drawer>
   );
+}
+
+function getRandomID() {
+  return `_${Math.random().toString(36).substr(2, 9)}`;
 }
