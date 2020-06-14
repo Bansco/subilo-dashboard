@@ -39,7 +39,7 @@ export default  function Jobs() {
 
   return (
     <Layout className="jobs-section">
-      <Layout.Sider width={200} className="site-layout-background">
+      <Layout.Sider width={300} className="site-layout-background">
         <Menu
           mode="inline"
           selectedKeys={[id]}
