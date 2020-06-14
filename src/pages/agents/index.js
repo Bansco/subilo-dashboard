@@ -25,6 +25,7 @@ import {
 import {
   agentsState,
   getAgent,
+  setSavedAgents
 } from '../../store'
 
 import './index.css';
@@ -44,28 +45,34 @@ export default function Agents() {
   function onSubmit(agentToSave) {
     setAgents((oldAgents) => {
       if (agentToSave.id) {
-        return oldAgents.map(agent => {
+        const updatedAgents = oldAgents.map(agent => {
           if (agent.id === agentToSave.id) {
             return agentToSave
           }
           return agent;
         })
+        setSavedAgents(updatedAgents);
+        return updatedAgents;
       }
 
-      return [
+      const withNewAgent = [
         ...oldAgents,
         {
           ...agentToSave,
           id: getRandomID()
         }
       ]
+      setSavedAgents(withNewAgent);
+      return withNewAgent;
     })
     hideAgentDetail();
   }
 
   function onDeleteAgent(agentID) {
     setAgents((oldAgents) => {
-      return oldAgents.filter(agent => agent.id !== agentID)
+      const updatedAgents = oldAgents.filter(agent => agent.id !== agentID);
+      setSavedAgents(updatedAgents);
+      return updatedAgents;
     })
   }
 
