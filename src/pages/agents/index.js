@@ -7,7 +7,8 @@ import {
   Space,
   Drawer,
   Form,
-  Input
+  Input,
+  Popconfirm
 } from 'antd';
 import {
   useParams
@@ -62,6 +63,12 @@ export default function Agents() {
     hideAgentDetail();
   }
 
+  function onDeleteAgent(agentID) {
+    setAgents((oldAgents) => {
+      return oldAgents.filter(agent => agent.id !== agentID)
+    })
+  }
+
   function hideAgentDetail() {
     setIsAgentDetailVisible(false);
     setSelectedID(null);
@@ -79,7 +86,10 @@ export default function Agents() {
           New Agent
         </Button>
       </div>
-      <AgentsList setSelectedID={setSelectedID} />
+      <AgentsList
+        setSelectedID={setSelectedID}
+        onDeleteAgent={onDeleteAgent}
+      />
       <AgentDetail
         id={selectedID}
         isVisible={isAgentDetailVisible}
@@ -91,7 +101,7 @@ export default function Agents() {
   )
 }
 
-function AgentsList({ setSelectedID }) {
+function AgentsList({ setSelectedID, onDeleteAgent }) {
   const agents = useRecoilValue(agentsState);
 
   const columns = [
@@ -138,7 +148,19 @@ function AgentsList({ setSelectedID }) {
             icon={<EditOutlined />}
             onClick={() => setSelectedID(record.id)}
           />
-          <Button shape="circle" type="primary" icon={<DeleteOutlined />}/>
+          <Popconfirm
+            title="Are you sure you want to delete this agent?"
+            onConfirm={() => onDeleteAgent(record.id)}
+            onCancel={() => {}}
+            okText="Yes"
+            cancelText="No"
+          >
+          <Button
+            shape="circle"
+            type="primary"
+            icon={<DeleteOutlined />}
+          />
+          </Popconfirm>
         </Space>
       ),
     },
