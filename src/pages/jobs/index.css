@@ -6,6 +6,10 @@
   padding: 20px;
 }
 
+.jobs-section .ant-empty {
+  flex-direction: column;
+}
+
 .job-detail {
   padding: 0;
 }

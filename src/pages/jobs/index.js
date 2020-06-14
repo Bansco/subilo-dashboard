@@ -31,24 +31,28 @@ import './index.css';
 export default  function Jobs() {
   const agents = useRecoilValue(agentsState);
   const { agentID, logID } = useParams();
+  const emptyAgents = agents && !agents.length;
+  const emptyContentDescription = emptyAgents ? <NoAgents/> : false;
 
   return (
     <Layout className="jobs-section">
-      <Layout.Sider width={300} className="site-layout-background">
-        <Menu
-          mode="inline"
-          selectedKeys={[`${agentID}-${logID}`]}
-          defaultOpenKeys={[agentID]}
-          style={{ height: '100%', borderRight: 0 }}
-        >
-          {agents.map((agent) => (
-            <AgentSubMenu key={agent.id} agent={agent}/>
-          ))}
-        </Menu>
-      </Layout.Sider>
+      {!emptyAgents && (
+        <Layout.Sider width={300} className="site-layout-background">
+          <Menu
+            mode="inline"
+            selectedKeys={[`${agentID}-${logID}`]}
+            defaultOpenKeys={[agentID]}
+            style={{ height: '100%', borderRight: 0 }}
+          >
+            {agents.map((agent) => (
+              <AgentSubMenu key={agent.id} agent={agent}/>
+            ))}
+          </Menu>
+        </Layout.Sider>
+      )}
 
       {agents && logID && <LogDetail agentID={agentID} logID={logID.replace('.log', '')} />}
-      {(!agentID || !logID) && <Layout.Content><Empty className="center" description={false}/></Layout.Content>}
+      {(!agentID || !logID) && <Layout.Content><Empty className="center" description={emptyContentDescription}/></Layout.Content>}
     </Layout>
   )
 }
@@ -121,4 +125,12 @@ function LogDetail({ agentID, logID }) {
       )}
     </Layout.Content>
   );
+}
+
+function NoAgents() {
+  return (
+    <span>
+      No jobs. Please, create an <Link to="/agents">agent</Link> first.
+    </span>
+  )
 }
