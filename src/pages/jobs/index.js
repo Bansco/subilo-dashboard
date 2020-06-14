@@ -13,7 +13,8 @@ import {
 } from "react-router-dom";
 import useRequest from '../../util/useRequest'
 import {
-  AlignLeftOutlined,
+  DesktopOutlined,
+  CodeOutlined,
   LoadingOutlined,
   WarningOutlined
 } from '@ant-design/icons';
@@ -79,9 +80,9 @@ function AgentSubMenu({ agent, ...rest }) {
   }
 
   return (
-    <Menu.SubMenu {...rest} key={agent.id} icon={<AlignLeftOutlined />} title={agent.name}>
+    <Menu.SubMenu {...rest} key={agent.id} icon={<DesktopOutlined />} title={agent.name}>
       {logs.map(log => (
-        <Menu.Item key={`${agent.id}-${log}`}>
+        <Menu.Item key={`${agent.id}-${log}`} icon={<CodeOutlined />}>
           <Link to={`/jobs/${agent.id}/${log}`}>{log}</Link>
         </Menu.Item>
       ))}
