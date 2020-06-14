@@ -31,9 +31,11 @@ export default  function Jobs() {
   const agent = agents[0];
 
   const { data } = useRequest({
-    url: `${agent.url}/logs`,
-    headers: {
-      Authorization: `Bearer ${agent.token}`
+    request: {
+      url: `${agent.url}/logs`,
+      headers: {
+        Authorization: `Bearer ${agent.token}`
+      }
     }
   })
 
@@ -71,9 +73,11 @@ export default  function Jobs() {
 
 function JobDetail({ agent, id }) {
   const { data } = useRequest({
-    url: `${agent.url}/logs/${id}`,
-    headers: {
-      Authorization: `Bearer ${agent.token}`
+    request: {
+      url: `${agent.url}/logs/${id}`,
+      headers: {
+        Authorization: `Bearer ${agent.token}`
+      }
     }
   })
 
@@ -81,8 +85,8 @@ function JobDetail({ agent, id }) {
     <Layout.Content className="job-detail">
       {data && (
         <Layout className="job-code">
-          {data.split('\n').map(line => (
-            <code>
+          {data.split('\n').map((line, index) => (
+            <code key={index}>
               {line}
             </code>
           ))}
