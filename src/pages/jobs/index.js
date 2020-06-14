@@ -81,9 +81,11 @@ function JobDetail({ agent, id }) {
     <Layout.Content className="job-detail">
       {data && (
         <Layout className="job-code">
-          <code>
-            {data}
-          </code>
+          {data.split('\n').map(line => (
+            <code>
+              {line}
+            </code>
+          ))}
         </Layout>
       )}
 
