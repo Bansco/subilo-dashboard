@@ -88,9 +88,20 @@ export default function Agents() {
         <Button
           type="primary"
           icon={<PlusOutlined />}
+          onClick={() => onSubmit({
+            name: 'Demo Agent',
+            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aHJlc2g6YWdlbnQiLCJjb21wYW55IjoidGhyZXNoIiwiZXhwIjoxMDAwMDAwMDAwMH0.by-P7_YTCqt0d6gL0Xexlmhr1PgyXhE5PRicroWaKyYTYT0yMJnfxvVxwOYQr5QhL89YQHKUS2-XDswNPuglAQ',
+            url: 'https://tsearch.xyz/threshtest'
+          })}
+        >
+          Demo Agent
+        </Button>
+        <Button
+          type="primary"
+          icon={<PlusOutlined />}
           onClick={() => setIsAgentDetailVisible(true)}
         >
-          New Agent
+          Agent
         </Button>
       </div>
       <AgentsList

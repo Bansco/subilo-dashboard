@@ -45,5 +45,9 @@
 }
 
 .section-actions .ant-btn {
+ margin-left: 20px;
+}
+
+.section-actions .ant-btn:first-child {
   margin-left: auto;
 }
