@@ -18,8 +18,6 @@ import {
 
 import './index.css';
 
-const { Sider, Content } = Layout;
-
 export default  function Jobs() {
   const { id } = useParams();
 
@@ -29,7 +27,7 @@ export default  function Jobs() {
 
   return (
     <Layout className="jobs-section">
-      <Sider width={200} className="site-layout-background">
+      <Layout.Sider width={200} className="site-layout-background">
         <Menu
           mode="inline"
           selectedKeys={[id]}
@@ -49,10 +47,10 @@ export default  function Jobs() {
             )
           }
         </Menu>
-      </Sider>
+      </Layout.Sider>
 
       {id && <JobDetail id={id} />}
-      {!id && <Content><Empty className="center" description={false}/></Content>}
+      {!id && <Layout.Content><Empty className="center" description={false}/></Layout.Content>}
     </Layout>
   )
 }
@@ -65,7 +63,7 @@ function JobDetail({ id }) {
   })
 
   return (
-    <Content className="job-detail">
+    <Layout.Content className="job-detail">
       {data && (
         <Layout className="job-code">
           <code>
@@ -135,6 +133,6 @@ function JobDetail({ id }) {
           <Spin indicator={<LoadingOutlined style={{ fontSize: 45 }} spin />} />
         </div>
       )}
-    </Content>
+    </Layout.Content>
   );
 }
