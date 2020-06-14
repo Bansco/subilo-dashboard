@@ -34,6 +34,7 @@ export default function Agents() {
   const { id } = useParams();
   const [isAgentDetailVisible, setIsAgentDetailVisible] = useState(!!id);
   const [selectedID, setSelectedID] = useState(id);
+  const agents = useRecoilValue(agentsState);
   const setAgents = useSetRecoilState(agentsState)
 
   useEffect(() => {
@@ -85,17 +86,19 @@ export default function Agents() {
     <Layout className="agents-section">
       <Layout.Content>
       <div className="section-actions">
-        <Button
-          type="primary"
-          icon={<PlusOutlined />}
-          onClick={() => onSubmit({
-            name: 'Demo Agent',
-            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aHJlc2g6YWdlbnQiLCJjb21wYW55IjoidGhyZXNoIiwiZXhwIjoxMDAwMDAwMDAwMH0.by-P7_YTCqt0d6gL0Xexlmhr1PgyXhE5PRicroWaKyYTYT0yMJnfxvVxwOYQr5QhL89YQHKUS2-XDswNPuglAQ',
-            url: 'https://tsearch.xyz/threshtest'
-          })}
-        >
-          Demo Agent
-        </Button>
+        {agents && !agents.length && (
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            onClick={() => onSubmit({
+              name: 'Demo Agent',
+              token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aHJlc2g6YWdlbnQiLCJjb21wYW55IjoidGhyZXNoIiwiZXhwIjoxMDAwMDAwMDAwMH0.by-P7_YTCqt0d6gL0Xexlmhr1PgyXhE5PRicroWaKyYTYT0yMJnfxvVxwOYQr5QhL89YQHKUS2-XDswNPuglAQ',
+              url: 'https://tsearch.xyz/threshtest'
+            })}
+          >
+            Demo Agent
+          </Button>
+        )}
         <Button
           type="primary"
           icon={<PlusOutlined />}
@@ -105,6 +108,7 @@ export default function Agents() {
         </Button>
       </div>
       <AgentsList
+        agents={agents}
         setSelectedID={setSelectedID}
         onDeleteAgent={onDeleteAgent}
       />
@@ -119,9 +123,7 @@ export default function Agents() {
   )
 }
 
-function AgentsList({ setSelectedID, onDeleteAgent }) {
-  const agents = useRecoilValue(agentsState);
-
+function AgentsList({ agents, setSelectedID, onDeleteAgent }) {
   const columns = [
     {
       title: 'ID',
