@@ -85,11 +85,17 @@ function AgentSubMenu({ agent, ...rest }) {
 
   return (
     <Menu.SubMenu {...rest} key={agent.id} icon={<DesktopOutlined />} title={agent.name}>
-      {logs.map(log => (
+      {logs.length && logs.map(log => (
         <Menu.Item key={`${agent.id}-${log}`} icon={<CodeOutlined />}>
           <Link to={`/jobs/${agent.id}/${log}`}>{log}</Link>
         </Menu.Item>
       ))}
+
+      {!logs.length && (
+        <Menu.Item key={`${agent.id}-no-logs`} icon={<CodeOutlined />}>
+          No Logs
+        </Menu.Item>
+      )}
     </Menu.SubMenu>
   )
 }
