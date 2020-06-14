@@ -256,7 +256,7 @@ function AgentDetail({ id, isVisible, onSubmit, onClose }) {
           name="token"
           rules={[{ required: true, message: 'Please, complete the token' }]}
         >
-          <Input addonBefore="Authorization: Bearer"/>
+          <Input addonBefore="Bearer"/>
         </Form.Item>
       </Form>
     </Drawer>
