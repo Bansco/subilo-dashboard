@@ -5,6 +5,7 @@ import {
   Skeleton,
   Empty,
   Spin,
+  message
 } from 'antd';
 import {
   Link,
@@ -13,7 +14,8 @@ import {
 import useRequest from '../../util/useRequest'
 import {
   AlignLeftOutlined,
-  LoadingOutlined
+  LoadingOutlined,
+  WarningOutlined
 } from '@ant-design/icons';
 import {
   useRecoilValue,
@@ -51,7 +53,7 @@ export default  function Jobs() {
 }
 
 function AgentSubMenu({ agent, ...rest }) {
-  const { data: logs } = useRequest({
+  const { data: logs, error } = useRequest({
     request: {
       url: `${agent.url}/logs`,
       headers: {
@@ -59,6 +61,14 @@ function AgentSubMenu({ agent, ...rest }) {
       }
     }
   })
+
+  if (error) {
+    return (
+      <Menu.Item {...rest} key={agent.id} icon={<WarningOutlined />} onClick={() => message.error(JSON.stringify(error))}>
+        Couldn't connect to {agent.name}
+      </Menu.Item>
+    )
+  }
 
   if (!logs) {
     return (
