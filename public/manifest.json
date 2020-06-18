@@ -1,6 +1,6 @@
 {
-  "short_name": "Tresh Dashboard",
-  "name": "UI for your tresh logs",
+  "short_name": "Thresh Dashboard",
+  "name": "UI for your Thresh logs",
   "icons": [
     {
       "src": "favicon.ico",
