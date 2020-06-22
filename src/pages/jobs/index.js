@@ -60,7 +60,7 @@ export default  function Jobs() {
 function AgentSubMenu({ agent, ...rest }) {
   const { data: logs, error } = useRequest({
     request: {
-      url: `${agent.url}/logs`,
+      url: `${agent.url}/jobs`,
       headers: {
         Authorization: `Bearer ${agent.token}`
       }
@@ -103,20 +103,24 @@ function AgentSubMenu({ agent, ...rest }) {
 function LogDetail({ agentID, logID }) {
   const agent = useRecoilValue(getAgent(agentID));
 
-  const { data } = useRequest({
+  const { data, error } = useRequest({
     request: {
-      url: `${agent.url}/logs/${logID}`,
+      url: `${agent.url}/jobs/${logID}`,
       headers: {
         Authorization: `Bearer ${agent.token}`
       }
     }
   })
 
+  if (error) {
+    return  'Couldn\'t load logs for this job'
+  }
+
   return (
     <Layout.Content className="job-detail">
       {data && (
         <Layout className="job-code">
-          {data.split('\n').map((line, index) => (
+          {data.log.split('\n').map((line, index) => (
             <code key={index}>
               {line}
             </code>
