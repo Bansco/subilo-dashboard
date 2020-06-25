@@ -1,5 +1,6 @@
 .jobs-section .ant-layout-sider-children .ant-menu {
-  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .jobs-section .skeletons {
