@@ -25,6 +25,8 @@ import {
   agentsState,
   getAgent,
 } from '../../store'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import formatDistance from 'date-fns/formatDistance'
 
 import './index.css';
 
@@ -119,13 +121,16 @@ function LogDetail({ agentID, logID }) {
   return (
     <Layout.Content className="job-detail">
       {data && (
-        <Layout className="job-code">
-          {data.log.split('\n').map((line, index) => (
-            <code key={index}>
-              {line}
-            </code>
-          ))}
-        </Layout>
+        <>
+          <JobHeader metadata={data.metadata}/>
+          <Layout className="job-code">
+            {data.log.split('\n').map((line, index) => (
+              <code key={index}>
+                {line}
+              </code>
+            ))}
+          </Layout>
+        </>
       )}
 
       {!data && (
@@ -135,6 +140,24 @@ function LogDetail({ agentID, logID }) {
       )}
     </Layout.Content>
   );
+}
+
+function JobHeader({ metadata }) {
+  const startedAt = new Date(metadata.started_at);
+  const endedAt = new Date(metadata.ended_at);
+  return (
+    <div className="job-header">
+      <div className="project-name">
+        <h2>{metadata.name}</h2>
+      </div>
+      <div title={`Started at: ${startedAt}`}>
+        <b>Duration:</b> {formatDistance(endedAt, startedAt)}
+      </div>
+      <div title={`Ended at: ${endedAt}`}>
+        <b>Finished:</b> {formatDistanceToNow(endedAt)} ago
+      </div>
+    </div>
+  )
 }
 
 function NoAgents() {
