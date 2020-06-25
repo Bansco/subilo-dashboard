@@ -26,7 +26,7 @@ import {
   getAgent,
 } from '../../store'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
-import formatDistance from 'date-fns/formatDistance'
+import formatDistanceStrict from 'date-fns/formatDistanceStrict'
 
 import './index.css';
 
@@ -144,18 +144,27 @@ function LogDetail({ agentID, logID }) {
 
 function JobHeader({ metadata }) {
   const startedAt = new Date(metadata.started_at);
-  const endedAt = new Date(metadata.ended_at);
+  const endedAt = metadata.ended_at && new Date(metadata.ended_at);
   return (
     <div className="job-header">
       <div className="project-name">
         <h2>{metadata.name}</h2>
       </div>
-      <div title={`Started at: ${startedAt}`}>
-        <b>Duration:</b> {formatDistance(endedAt, startedAt)}
-      </div>
-      <div title={`Ended at: ${endedAt}`}>
-        <b>Finished:</b> {formatDistanceToNow(endedAt)} ago
-      </div>
+      {endedAt && (
+        <>
+        <div title={`Started at: ${startedAt}`}>
+          <b>Duration:</b> {formatDistanceStrict(endedAt, startedAt)}
+        </div>
+        <div title={`Ended at: ${endedAt}`}>
+          <b>Finished:</b> {formatDistanceToNow(endedAt)} ago
+        </div>
+        </>
+      )}
+      {!endedAt && (
+        <div>
+          Running...
+        </div>
+      )}
     </div>
   )
 }
