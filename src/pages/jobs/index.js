@@ -5,7 +5,8 @@ import {
   Skeleton,
   Empty,
   Spin,
-  message
+  message,
+  Tag
 } from 'antd';
 import {
   Link,
@@ -16,7 +17,9 @@ import {
   DesktopOutlined,
   CodeOutlined,
   LoadingOutlined,
-  WarningOutlined
+  WarningOutlined,
+  CheckCircleOutlined,
+  SyncOutlined
 } from '@ant-design/icons';
 import {
   useRecoilValue,
@@ -149,6 +152,7 @@ function JobHeader({ metadata }) {
     <div className="job-header">
       <div className="project-name">
         <h2>{metadata.name}</h2>
+        <StatusLabel status={metadata.status}/>
       </div>
       {endedAt && (
         <>
@@ -160,13 +164,32 @@ function JobHeader({ metadata }) {
         </div>
         </>
       )}
-      {!endedAt && (
-        <div>
-          Running...
-        </div>
-      )}
     </div>
   )
+}
+
+function StatusLabel({ status }) {
+  if (status === 'pending') {
+    return (
+      <Tag icon={<SyncOutlined spin />} color="processing">
+        Pending
+      </Tag>
+    )
+  } else if (status === 'failed') {
+    return (
+      <Tag icon={<WarningOutlined />} color="error">
+        Failed
+      </Tag>
+    )
+  } else if (status === 'succeeded') {
+    return (
+      <Tag icon={<CheckCircleOutlined />} color="success">
+        Success
+      </Tag>
+    )
+  }
+
+  return null;
 }
 
 function NoAgents() {

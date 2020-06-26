@@ -13,19 +13,26 @@
 
 .job-detail {
   padding: 0;
+  background-color: black;
 }
 
 .job-header {
   padding: 20px;
+  background-color: #eff2f5;
 }
 
 .job-header h2 {
   margin: 0;
+  margin-right: 10px;
+}
+
+.job-header .project-name {
+  display: flex;
+  align-items: center;
 }
 
 .job-detail .job-code {
   padding: 15px;
   background: black;
   color: white;
-  height: 105vh;
 }
