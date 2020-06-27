@@ -4,11 +4,11 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect
 } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
 
 import TopHeader from './components/TopHeader';
-import Home from './pages/home'
 import Agents from './pages/agents'
 import Jobs from './pages/jobs'
 
@@ -27,7 +27,7 @@ export default function App() {
               <Jobs />
             </Route>
             <Route path="/">
-              <Home />
+              <Redirect to="/jobs"/>
             </Route>
           </Switch>
         </Layout>

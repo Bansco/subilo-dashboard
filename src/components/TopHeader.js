@@ -20,19 +20,16 @@ export default function CustomHeader() {
  return (
   <Header className="header">
       <div className="logo">
-        <Link to="/">
+        <Link to="/jobs">
           <h2>THRESH</h2>
         </Link>
       </div>
     <Menu mode="horizontal" selectedKeys={[selectedKeys]}>
-      <Menu.Item key="/">
-        <Link to="/">Home</Link>
+      <Menu.Item key="/jobs">
+        <Link to="/jobs">Jobs</Link>
       </Menu.Item>
       <Menu.Item key="/agents">
         <Link to="/agents">Agents</Link>
-      </Menu.Item>
-      <Menu.Item key="/jobs">
-        <Link to="/jobs">Jobs</Link>
       </Menu.Item>
     </Menu>
   </Header>
