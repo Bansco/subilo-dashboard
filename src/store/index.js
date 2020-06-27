@@ -2,10 +2,18 @@ import {
   atom,
   selectorFamily
 } from 'recoil';
+import { getCurrentTheme } from '../components/Theme'
 
 export const agentsState = atom({
   key: 'agentsState',
   default: getSavedAgents(),
+});
+
+export const uiState = atom({
+  key: 'uiState',
+  default: {
+    theme: getCurrentTheme()
+  }
 });
 
 export const getAgent = selectorFamily({

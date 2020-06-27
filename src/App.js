@@ -9,12 +9,15 @@ import {
 import { RecoilRoot } from 'recoil';
 
 import TopHeader from './components/TopHeader';
+import Theme from './components/Theme';
 import Agents from './pages/agents'
 import Jobs from './pages/jobs'
 
 export default function App() {
   return (
     <RecoilRoot>
+      <Theme/>
+
       <Router>
         <Layout>
           <TopHeader/>

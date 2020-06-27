@@ -1,13 +1,5 @@
 @import '~antd/dist/antd.css' screen;
-/* @import '~antd/dist/antd.dark.css' screen and (prefers-color-scheme: dark); */
-
-/* @media (prefers-color-scheme: light) {
-  @import '~antd/dist/antd.css';
-} */
-
-/* @media (prefers-color-scheme: dark) {
-  @import '~antd/dist/antd.dark.css';
-} */
+@import '~antd/dist/antd.dark.css' screen and (prefers-color-scheme: dark);
 
 * {
   font-family: Avenir,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,noto sans,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol,noto color emoji,sans-serif;
