@@ -1,8 +1,19 @@
 .ant-layout-header {
   display: flex;
-  background: white;
   box-shadow: 0 0 3px 0 rgba(0,0,0,.15);
   z-index: 10;
+}
+
+.ant-menu-item {
+  border-bottom: 0;
+}
+
+.light .ant-layout-header {
+  background: white;
+}
+
+.dark .ant-menu-item {
+  background: #1f1f1f;
 }
 
 .ant-layout-header .ant-menu-horizontal {
@@ -10,7 +21,7 @@
 }
 
 .ant-layout-header .ant-menu-horizontal .ant-menu-item {
-  top: 0;
+  top: -1px;
 }
 
 .logo {
