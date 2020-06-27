@@ -9,11 +9,9 @@ export const agentsState = atom({
   default: getSavedAgents(),
 });
 
-export const uiState = atom({
-  key: 'uiState',
-  default: {
-    theme: getCurrentTheme()
-  }
+export const themeState = atom({
+  key: 'themeState',
+  default: getCurrentTheme()
 });
 
 export const getAgent = selectorFamily({
