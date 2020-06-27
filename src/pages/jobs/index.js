@@ -38,6 +38,8 @@ export default  function Jobs() {
   const { agentID, logID } = useParams();
   const emptyAgents = agents && !agents.length;
   const emptyContentDescription = emptyAgents ? <NoAgents/> : false;
+  const firstAgentID = !emptyAgents && agents[0].id;
+  const defaultOpenKeys = agentID || firstAgentID
 
   return (
     <Layout className="jobs-section">
@@ -46,7 +48,7 @@ export default  function Jobs() {
           <Menu
             mode="inline"
             selectedKeys={[`${agentID}-${logID}`]}
-            defaultOpenKeys={[agentID]}
+            defaultOpenKeys={[defaultOpenKeys]}
             style={{ height: '100%', borderRight: 0 }}
           >
             {agents.map((agent) => (
