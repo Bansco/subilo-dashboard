@@ -47,6 +47,7 @@ export default  function Jobs() {
         <Layout.Sider width={300} className="site-layout-background">
           <Menu
             mode="inline"
+            className="jobs-list"
             selectedKeys={[`${agentID}-${logID}`]}
             defaultOpenKeys={[defaultOpenKeys]}
             style={{ height: '100%', borderRight: 0 }}

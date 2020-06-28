@@ -31,8 +31,16 @@
   align-items: center;
 }
 
+.dark .job-header {
+  background-color: #100f0f;
+}
+
 .job-detail .job-code {
   padding: 15px;
   background: black;
   color: white;
+}
+
+.jobs-list .ant-menu-item:not(.ant-menu-item-selected) {
+  background: transparent;
 }
