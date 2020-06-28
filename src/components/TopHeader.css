@@ -32,3 +32,9 @@
   color: #1890ff;
   margin: 0;
 }
+
+.theme-switch {
+  margin-left: auto;
+  font-size: 1.3em;
+  cursor: pointer;
+}

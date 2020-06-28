@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
   useRecoilValue,
   useSetRecoilState
@@ -23,9 +23,18 @@ export default function Theme() {
     document.body.classList.add(theme)
   }, [theme])
 
-  console.log({ theme })
-
   return null;
+}
+
+export function ThemeToggle() {
+  const theme = useRecoilValue(themeState);
+  const setTheme = useSetRecoilState(themeState)
+
+  if (theme === 'dark') {
+    return <span className="theme-switch" onClick={() => setTheme('light')} role="img" aria-label="Light mode">☀️</span>
+  }
+
+  return <span className="theme-switch" onClick={() => setTheme('dark')} role="img" aria-label="Dark mode">🌘</span>
 }
 
 export function getCurrentTheme() {
