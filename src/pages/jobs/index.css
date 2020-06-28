@@ -3,6 +3,10 @@
   overflow-x: hidden;
 }
 
+.jobs-list .ant-menu-item:not(.ant-menu-item-selected) {
+  background: transparent;
+}
+
 .jobs-section .skeletons {
   padding: 20px;
 }
@@ -21,6 +25,11 @@
   background-color: #eff2f5;
 }
 
+.dark .job-header {
+  background-color: #100f0f;
+}
+
+
 .job-header h2 {
   margin: 0;
   margin-right: 10px;
@@ -31,16 +40,14 @@
   align-items: center;
 }
 
-.dark .job-header {
-  background-color: #100f0f;
+.job-header .ant-tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .job-detail .job-code {
   padding: 15px;
   background: black;
   color: white;
-}
-
-.jobs-list .ant-menu-item:not(.ant-menu-item-selected) {
-  background: transparent;
 }
