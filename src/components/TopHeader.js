@@ -33,7 +33,7 @@ export default function CustomHeader() {
         <Link to="/agents">Agents</Link>
       </Menu.Item>
     </Menu>
-    <ThemeToggle/>
+    {/* <ThemeToggle/> */}
   </Header>
  )
 }
