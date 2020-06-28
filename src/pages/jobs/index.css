@@ -51,3 +51,8 @@
   background: black;
   color: white;
 }
+
+.job-code code span {
+  /* TODO: <span> (rendered by Ansi) inside <code> do not get monospace font  */
+  font-family: inherit;
+}
