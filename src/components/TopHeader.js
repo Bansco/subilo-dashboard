@@ -7,7 +7,6 @@ import {
   Menu,
   Layout
 } from 'antd';
-import { ThemeToggle } from './Theme';
 
 import './TopHeader.css';
 
@@ -33,7 +32,6 @@ export default function CustomHeader() {
         <Link to="/agents">Agents</Link>
       </Menu.Item>
     </Menu>
-    {/* <ThemeToggle/> */}
   </Header>
  )
 }
