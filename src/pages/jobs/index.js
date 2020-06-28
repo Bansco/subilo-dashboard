@@ -30,6 +30,7 @@ import {
 } from '../../store'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import formatDistanceStrict from 'date-fns/formatDistanceStrict'
+import Ansi from 'ansi-to-react'
 
 import './index.css';
 
@@ -131,9 +132,7 @@ function LogDetail({ agentID, logID }) {
           <JobHeader metadata={data.metadata}/>
           <Layout className="job-code">
             {data.log.split('\n').map((line, index) => (
-              <code key={index}>
-                {line}
-              </code>
+              <Ansi key={index}>{line}</Ansi>
             ))}
           </Layout>
         </>
