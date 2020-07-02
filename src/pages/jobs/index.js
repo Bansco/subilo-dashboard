@@ -61,7 +61,7 @@ export default  function Jobs() {
       )}
 
       {agents && logID && <LogDetail agentID={agentID} logID={logID.replace('.log', '')} />}
-      {(!agentID || !logID) && <Layout.Content><Empty className="center" description={emptyContentDescription}/></Layout.Content>}
+      {(!agentID || !logID) && <Layout.Content><Empty className="center" image={Empty.PRESENTED_IMAGE_SIMPLE} description={emptyContentDescription}/></Layout.Content>}
     </Layout>
   )
 }
