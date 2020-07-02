@@ -21,7 +21,7 @@ export default function CustomHeader() {
   <Header className="header">
       <div className="logo">
         <Link to="/jobs">
-          <h2>THRESH</h2>
+          <h2>SUBILO</h2>
         </Link>
       </div>
     <Menu mode="horizontal" selectedKeys={[selectedKeys]}>
