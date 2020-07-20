@@ -171,7 +171,7 @@ function JobHeader({ metadata }) {
 }
 
 function StatusLabel({ status }) {
-  if (status === 'pending') {
+  if (status === 'started') {
     return (
       <Tag icon={<SyncOutlined spin />} color="processing">
         Pending
