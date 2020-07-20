@@ -38,7 +38,7 @@
 }
 
 .ant-layout-sider-children {
-  overflow: scroll;
+  overflow: auto;
 }
 
 .center {
