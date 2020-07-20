@@ -18,6 +18,9 @@
 .job-detail {
   padding: 0;
   background-color: black;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
 }
 
 .job-header {
@@ -28,7 +31,6 @@
 .dark .job-header {
   background-color: #100f0f;
 }
-
 
 .job-header h2 {
   margin: 0;
@@ -47,9 +49,12 @@
 }
 
 .job-detail .job-code {
-  padding: 15px;
+  padding: 25px;
   background: black;
   color: white;
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .job-code code span {

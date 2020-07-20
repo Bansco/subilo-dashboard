@@ -231,7 +231,7 @@ function AgentDetail({ id, isVisible, onSubmit, onClose }) {
   return (
     <Drawer
       title={title}
-      width={'70%'}
+      width={'40%'}
       onClose={onClose}
       visible={isVisible}
       bodyStyle={{ paddingBottom: 80 }}

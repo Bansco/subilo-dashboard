@@ -1,8 +1,24 @@
-@import '~antd/dist/antd.css' screen;
-@import '~antd/dist/antd.dark.css' screen and (prefers-color-scheme: dark);
+/*@import '~antd/dist/antd.css' screen;*/
+@import "~antd/dist/antd.dark.css" screen;
+
+@font-face {
+  font-family: "SpaceMono-Regular";
+  src: url("./font/SpaceMono-Regular.ttf") format("woff"),
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+      url("./font/SpaceMono-Regular.ttf") format("truetype"); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
+
+@font-face {
+  font-family: "SpaceMono-Bold";
+  src: url("./font/SpaceMono-Bold.ttf") format("woff"),
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+      url("./font/SpaceMono-Bold.ttf") format("truetype"); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+}
 
 * {
-  font-family: Avenir,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,noto sans,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol,noto color emoji,sans-serif;
+  font-family: "SpaceMono-Regular", -apple-system, BlinkMacSystemFont, segoe ui,
+    Roboto, helvetica neue, Arial, noto sans, sans-serif, apple color emoji,
+    segoe ui emoji, segoe ui symbol, noto color emoji, sans-serif;
 }
 
 #root {
@@ -18,7 +34,7 @@
 }
 
 .ant-layout-content {
-  padding: 20px 50px;
+  padding: 20px;
 }
 
 .ant-layout-sider-children {
@@ -38,7 +54,7 @@
 }
 
 .section-actions .ant-btn {
- margin-left: 20px;
+  margin-left: 20px;
 }
 
 .section-actions .ant-btn:first-child {

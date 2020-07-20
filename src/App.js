@@ -4,19 +4,20 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
 } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
 
 import TopHeader from './components/TopHeader';
-import Theme from './components/Theme';
+// import Theme from './components/Theme';
 import Agents from './pages/agents'
 import Jobs from './pages/jobs'
+import Home from './pages/home'
 
 export default function App() {
   return (
     <RecoilRoot>
-      <Theme/>
+      {/* using Dark theme for now */}
+      {/*<Theme/>*/}
 
       <Router>
         <Layout>
@@ -30,7 +31,7 @@ export default function App() {
               <Jobs />
             </Route>
             <Route path="/">
-              <Redirect to="/jobs"/>
+              <Home />
             </Route>
           </Switch>
         </Layout>

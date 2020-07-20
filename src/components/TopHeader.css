@@ -24,17 +24,29 @@
   top: -1px;
 }
 
-.logo {
-  margin-right: 50px;
-}
-
 .logo h2 {
   color: #1890ff;
   margin: 0;
+  position: relative;
+  top: 1px;
+}
+
+.logo a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo img {
+  margin-right: 15px;
 }
 
 .theme-switch {
   margin-left: auto;
   font-size: 1.3em;
   cursor: pointer;
+}
+
+.ant-menu.menu-navigation {
+  margin-left: auto;
 }

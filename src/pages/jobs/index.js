@@ -34,7 +34,7 @@ import Ansi from 'ansi-to-react'
 
 import './index.css';
 
-export default  function Jobs() {
+export default function Jobs() {
   const agents = useRecoilValue(agentsState);
   const { agentID, logID } = useParams();
   const emptyAgents = agents && !agents.length;
