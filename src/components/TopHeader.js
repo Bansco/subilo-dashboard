@@ -18,6 +18,7 @@ export default function CustomHeader(props) {
   const location = useLocation()
   const pathname = location.pathname;
   const selectedKeys = pathname.includes('/jobs') ? '/jobs' : pathname;
+  const isHome = pathname === '/'
 
  return (
   <Header className="header">
@@ -28,15 +29,21 @@ export default function CustomHeader(props) {
     </Link>
   </div>
     <Menu mode="horizontal" selectedKeys={[selectedKeys]} className="menu-navigation">
-      <Menu.Item key="/">
-         <Link to="/">Home</Link>
-      </Menu.Item>
-      <Menu.Item key="/jobs">
-        <Link to="/jobs">Jobs</Link>
-      </Menu.Item>
-      <Menu.Item key="/agents">
-        <Link to="/agents">Agents</Link>
-      </Menu.Item>
+      {isHome && (
+        <Menu.Item key="/jobs">
+          <Link to="/jobs">Dashboard</Link>
+        </Menu.Item>
+      )}
+      {!isHome && (
+        <Menu.Item key="/jobs">
+          <Link to="/jobs">Jobs</Link>
+        </Menu.Item>
+      )}
+      {!isHome && (
+        <Menu.Item key="/agents">
+          <Link to="/agents">Agents</Link>
+        </Menu.Item>
+      )}
       <Menu.Item key="/docs">
         <a href="https://github.com/huemul/subilo#subilo">Docs</a>
         <GithubOutlined style={githubLogoStyles} />
