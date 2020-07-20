@@ -6,7 +6,6 @@ import { DoubleRightOutlined } from '@ant-design/icons'
 import './index.css'
 
 function Home (props) {
-  console.log('props', props)
   return (
     <div className="home">
       <div className="title-section">
