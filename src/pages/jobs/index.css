@@ -57,6 +57,17 @@
   overflow-y: auto;
 }
 
+.ant-empty-normal {
+  margin: 0;
+}
+
+.ant-layout-content {
+  overflow-x: hidden;
+  box-sizing: border-box;
+  overflow: auto;
+  height: calc(100vh - 64px);
+}
+
 .job-code code span {
   /* TODO: <span> (rendered by Ansi) inside <code> do not get monospace font  */
   font-family: inherit;
