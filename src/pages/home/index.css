@@ -105,20 +105,7 @@
 .home .install-description {
   margin-top: 35px;
   font-size: 17px;
-}
-
-.home .install-subtitle {
-  margin-top: 20px;
-}
-
-.home .manually {
-  margin-top: 30px;
-  margin-bottom: -19px;
-}
-
-.home .code-block.left {
-  text-align: left;
-  margin-bottom: 150px;
+  margin-bottom: 120px;
 }
 
 .home code {

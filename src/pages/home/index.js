@@ -2,13 +2,35 @@ import React from "react";
 import logoImg from "../../assets/logo.png";
 import { Button } from "antd";
 import { DoubleRightOutlined } from "@ant-design/icons";
-import chris from "../../assets/chris.png";
-import jona from "../../assets/jona.jpg";
-import joni from "../../assets/joni.jpg";
-import mati from "../../assets/mati.jpg";
-import nico from "../../assets/nico.png";
-
 import "./index.css";
+
+const profiles = [
+  {
+    name: "Christian",
+    gh: "gillchristian",
+    link: "https://gillchristian.xyz",
+  },
+  {
+    name: "Jonas",
+    gh: "Jonasjonathan",
+    link: "https://www.behance.net/Jonathanjonas",
+  },
+  {
+    name: "Joni",
+    gh: "jonidelv",
+    link: "https://twitter.com/jonidelv",
+  },
+  {
+    name: "Mati",
+    gh: "matiastucci",
+    link: "https://github.com/matiastucci",
+  },
+  {
+    name: "Nico",
+    gh: "ndelvalle",
+    link: "https://github.com/ndelvalle",
+  },
+];
 
 function Home() {
   return (
@@ -28,7 +50,7 @@ function Home() {
             type="primary"
             className="see-demo-button"
             onClick={() => {
-              window.location.href = "https://github.com/huemul/subilo";
+              window.location.href = "/agents";
             }}
           >
             See Demo
@@ -44,13 +66,15 @@ function Home() {
             onClick={() => {
               document
                 .getElementById("scroll-hook")
-                .scrollIntoView({ block: "end", behavior: "smooth" });
+                .scrollIntoView({ block: "start", behavior: "smooth" });
             }}
           />
         </section>
       </div>
       <div className="description-section">
-        <div className="description-section-title">How it works</div>
+        <div className="description-section-title" id="scroll-hook">
+          How it works
+        </div>
         <div className="platform-description">
           Subilo It's a small server that listens on a specified port for HTTP
           requests (the port should be open to the internet). It exposes a
@@ -82,69 +106,20 @@ function Home() {
           variable in the correct profile file (~/.profile, ~/.bashrc,
           ~/.bash_profile, ~/.zshrc or ~/.config/fish/config.fish)
         </div>
-        <div
-          className="install-section-subtitle install-subtitle"
-          id="scroll-hook"
-        >
-          Cargo
-        </div>
-        <div className="code-block">
-          <pre>
-            <code>$ cargo install subilo</code>
-          </pre>
-        </div>
-        <div className="install-section-subtitle manually">Manually</div>
-        <div className="install-description">
-          Download the latest released binary and add executable permissions:
-        </div>
-        <div className="code-block left">
-          <pre>
-            <code>
-              $ wget -O subilo
-              "https://github.com/Huemul/subilo/releases/download/v0.0.1/subilo-x86-64-linux"
-            </code>
-          </pre>
-          <pre>$ chmod +x subilo</pre>
-        </div>
       </div>
       <div className="footer">
         <span>by</span>
         <div className="avatars">
-          <a
-            href="https://gillchristian.xyz"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <img src={chris} width="30" alt="christian" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/jonathan-jonas-677301114/"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <img src={jona} width="30" alt="jonatan" />
-          </a>
-          <a
-            href="https://twitter.com/jonidelv"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <img src={joni} width="30" alt="joni" />
-          </a>
-          <a
-            href="https://github.com/matiastucci"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <img src={mati} width="30" alt="matias" />
-          </a>
-          <a
-            href="https://github.com/ndelvalle"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <img src={nico} width="30" alt="nico" />
-          </a>
+          {profiles.map(({ gh, link, name }) => (
+            <a href={link} rel="noopener noreferrer" target="_blank">
+              <img
+                key={name}
+                src={`https://github.com/${gh}.png?size=60`}
+                width="30"
+                alt={name}
+              />
+            </a>
+          ))}
         </div>
         <span>
           <span className="icon">©</span> {new Date().getFullYear()}
