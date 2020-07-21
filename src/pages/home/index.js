@@ -109,37 +109,43 @@ function Home() {
       </div>
       <div className="footer">
         <span>by</span>
-        <a
-          href="https://gillchristian.xyz"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <img src={chris} width="30" alt="christian" />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/jonathan-jonas-677301114/"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <img src={jona} width="30" alt="jonatan" />
-        </a>
-        <a
-          href="https://twitter.com/jonidelv"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <img src={joni} width="30" alt="joni" />
-        </a>
-        <a href="https://github.com/matiastucci" rel="noopener noreferrer" target="_blank">
-          <img src={mati} width="30" alt="matias" />
-        </a>
-        <a
-          href="https://github.com/ndelvalle"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <img src={nico} width="30" alt="nico" />
-        </a>
+        <div className="avatars">
+          <a
+            href="https://gillchristian.xyz"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <img src={chris} width="30" alt="christian" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/jonathan-jonas-677301114/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <img src={jona} width="30" alt="jonatan" />
+          </a>
+          <a
+            href="https://twitter.com/jonidelv"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <img src={joni} width="30" alt="joni" />
+          </a>
+          <a
+            href="https://github.com/matiastucci"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <img src={mati} width="30" alt="matias" />
+          </a>
+          <a
+            href="https://github.com/ndelvalle"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <img src={nico} width="30" alt="nico" />
+          </a>
+        </div>
         <span>
           <span className="icon">©</span> {new Date().getFullYear()}
         </span>
