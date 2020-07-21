@@ -141,6 +141,14 @@
   align-items: center;
 }
 
+.home .footer a {
+  transition: all 0.3s ease;
+}
+
+.home .footer a:hover {
+  transform: scale(1.2);
+}
+
 .home .footer span {
   display: inline-block;
   margin-right: 15px;
