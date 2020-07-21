@@ -130,7 +130,7 @@ function Home() {
         >
           <img src={joni} width="30" alt="joni" />
         </a>
-        <a href="https://tucci.me/" rel="noopener noreferrer" target="_blank">
+        <a href="https://github.com/matiastucci" rel="noopener noreferrer" target="_blank">
           <img src={mati} width="30" alt="matias" />
         </a>
         <a
