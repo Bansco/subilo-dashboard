@@ -219,7 +219,7 @@ function getJobName (id) {
     .join('')
     .slice(0, -1); // Remove last underscore from job name 
 
-  const timestamp = Date.UTC(...[year, month, day, hour, minute, second])
+  const timestamp = Date.UTC(year, month, day, hour, minute, second)
   const date = new Date(timestamp)
 
   return `${name} ${date}`
