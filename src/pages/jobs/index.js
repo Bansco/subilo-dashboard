@@ -132,7 +132,9 @@ function LogDetail({ agentID, logID }) {
           <JobHeader metadata={data.metadata}/>
           <Layout className="job-code">
             {data.log.split('\n').map((line, index) => (
-              <Ansi key={index}>{line}</Ansi>
+              <Ansi key={index} className={line.startsWith('$ ') ? "job-command" : ""}>
+                {line}
+              </Ansi>
             ))}
           </Layout>
         </>

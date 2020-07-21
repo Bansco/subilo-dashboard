@@ -72,3 +72,9 @@
   /* TODO: <span> (rendered by Ansi) inside <code> do not get monospace font  */
   font-family: inherit;
 }
+
+.job-code .job-command {
+  color: #177ddc;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
