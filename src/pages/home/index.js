@@ -108,11 +108,19 @@ function Home() {
         </div>
       </div>
       <div className="footer">
-        <span>With (L) by </span>
-        <a href="#" rel="noopener noreferrer" target="_blank">
+        <span>by</span>
+        <a
+          href="https://gillchristian.xyz"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <img src={chris} width="30" alt="christian" />
         </a>
-        <a href="#" rel="noopener noreferrer" target="_blank">
+        <a
+          href="https://www.linkedin.com/in/jonathan-jonas-677301114/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <img src={jona} width="30" alt="jonatan" />
         </a>
         <a
@@ -122,10 +130,14 @@ function Home() {
         >
           <img src={joni} width="30" alt="joni" />
         </a>
-        <a href="#" rel="noopener noreferrer" target="_blank">
+        <a href="https://tucci.me/" rel="noopener noreferrer" target="_blank">
           <img src={mati} width="30" alt="matias" />
         </a>
-        <a href="#" rel="noopener noreferrer" target="_blank">
+        <a
+          href="https://github.com/ndelvalle"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <img src={nico} width="30" alt="nico" />
         </a>
         <span>
