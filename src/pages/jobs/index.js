@@ -96,7 +96,7 @@ function AgentSubMenu({ agent, ...rest }) {
     <Menu.SubMenu {...rest} key={agent.id} icon={<DesktopOutlined />} title={agent.name}>
       {logs.length && logs.map(log => (
         <Menu.Item key={`${agent.id}-${log}`} icon={<CodeOutlined />}>
-          <Link to={`/jobs/${agent.id}/${log}`}>{log}</Link>
+          <Link to={`/jobs/${agent.id}/${log}`}>{getJobName(log)}</Link>
         </Menu.Item>
       ))}
 
@@ -202,4 +202,25 @@ function NoAgents() {
       No jobs. Please, create an <Link to="/agents">agent</Link> first.
     </span>
   )
+}
+
+function getJobName (id) {
+  const DATE_LENGTH = 20
+
+  const [year, month, day, _, hour, minute, second] = id.split('')
+    .splice(-DATE_LENGTH)
+    .join('')
+    .split('-');
+
+  const name = id.split('')
+    .reverse()
+    .splice(DATE_LENGTH)
+    .reverse()
+    .join('')
+    .slice(0, -1); // Remove last underscore from job name 
+
+  const timestamp = Date.UTC(year, month, day, hour, minute, second)
+  const date = new Date(timestamp)
+
+  return `${name} ${date}`
 }
