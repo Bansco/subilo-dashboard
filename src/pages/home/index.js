@@ -38,13 +38,16 @@ function Home() {
       <div className="title-section">
         <section className="presentation">
           <img className="logo" src={logoImg} width={50} alt="logo" />
-          <h1 className="title">
+          {/* <h1 className="title">
             <strong>Best Platform</strong>
             <br />
             to develop your works
+          </h1> */}
+          <h1 className="title">
+            <strong>Subilo</strong>
           </h1>
           <div className="title-description">
-            Easy development for virtualmachines
+            Tiny continuous deployment agent 
           </div>
           <Button
             type="primary"
@@ -56,9 +59,9 @@ function Home() {
             See Demo
           </Button>
           <div className="presentation-description">
-            Subilo is a deployment agent that allows executing predefined bash
-            commands on the server where it is running (VPS, raspberry PI, any
-            Linux machine)
+            Subilo improves the deployment process for projects where normal
+            CI's can not reach, like IoT devices and VPS not attached to an
+            orchestration service.
           </div>
           <DoubleRightOutlined
             className="icon-down-arrow"
