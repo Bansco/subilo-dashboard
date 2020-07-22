@@ -1,15 +1,10 @@
 import React from "react";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
-import {
-  DoubleRightOutlined,
-  CopyOutlined,
-  CheckCircleOutlined,
-} from "@ant-design/icons";
+import { DoubleRightOutlined } from "@ant-design/icons";
 
 import logoImg from "../../assets/logo.png";
 import "./index.css";
-import { useCopy } from "../../util/useCopy";
 
 function Home() {
   return (
@@ -22,9 +17,12 @@ function Home() {
           </h1>
           <div className="title-description">Deployment automation agent</div>
           <div className="presentation-description">
-            Subilo is what happens after CI is done.
-            <br />A perfect fit to setup continous deployments for applications
-            running on IoT devices and VPSs.
+            Subilo is a tool to setup continuous deployments for applications
+            running on machines with no external integrations like IoT devices
+            and VPSs.
+            <br />
+            Filling this gap you can enjoy automated deployments and a cool
+            dashboard to check what is going on!
           </div>
           <div className="hero-buttons">
             <Link to="/jobs">
@@ -61,105 +59,8 @@ function Home() {
         </div>
       </div>
 
-      <InstallScript />
-      <RunDeployment />
       <SeeItInAction />
       <Footer />
-    </div>
-  );
-}
-
-function InstallScript() {
-  const [installStatus, copyInstall] = useCopy(
-    "curl -s -L https://raw.githubusercontent.com/Huemul/subilo/master/install.sh | bash"
-  );
-
-  const [tomlStatus, copyToml] = useCopy("TODO !!!");
-
-  return (
-    <div className="install-section">
-      <div className="install-section-title">Install and Setup</div>
-      <div className="platform-description">
-        On any Linux machine you want to deploy an application to. Run this
-        command:
-      </div>
-      <div className="install-script">
-        <div className="code-block">
-          <pre>
-            curl -s -L
-            https://raw.githubusercontent.com/Huemul/subilo/master/install.sh |
-            bash
-          </pre>
-        </div>
-        {installStatus === "copy" && (
-          <CopyOutlined onClick={copyInstall} className="copy-icon" />
-        )}
-        {installStatus === "copied" && (
-          <CheckCircleOutlined className="copy-icon" />
-        )}
-      </div>
-
-      <div className="platform-description">
-        Configure the app you want to be deployed.
-      </div>
-
-      <div className="install-script">
-        <div className="code-block">
-          <pre>
-            [[projects]]
-            <br />
-            name = "my-project"
-            <br />
-            path = "~/www/my-project"
-            <br />
-            commands = [<br />
-            {"  "}"git pull --rebase",
-            <br />
-            {"  "}"docker pull johndoe/my-project:latest",
-            <br />
-            {"  "}"docker-compose down",
-            <br />
-            {"  "}"docker-compose up -d",
-            <br />]
-          </pre>
-        </div>
-        {tomlStatus === "copy" && (
-          <CopyOutlined onClick={copyToml} className="copy-icon" />
-        )}
-        {tomlStatus === "copied" && (
-          <CheckCircleOutlined className="copy-icon" />
-        )}
-      </div>
-    </div>
-  );
-}
-
-function RunDeployment() {
-  const [copyStatus, copyToClipboard] = useCopy("TODO !!!");
-
-  return (
-    <div className="install-section">
-      <div className="install-section-title">Deploy an app</div>
-      <div className="platform-description">
-        Trigger the deployment job by send a webhook event to the agent.
-      </div>
-
-      <div className="install-script">
-        <div className="code-block">
-          <pre>
-            curl -H 'Authorization: Bearer ....' \<br />
-            {"  "}-H 'Content-Type: application/json' \<br />
-            {"  "}-data '{"{"} "name": "my-project" {"}"}' \<br />
-            {"  "}-X POST https://subilo.my-vps-url.com/webhook
-          </pre>
-        </div>
-        {copyStatus === "copy" && (
-          <CopyOutlined onClick={copyToClipboard} className="copy-icon" />
-        )}
-        {copyStatus === "copied" && (
-          <CheckCircleOutlined className="copy-icon" />
-        )}
-      </div>
     </div>
   );
 }
@@ -168,10 +69,15 @@ function SeeItInAction() {
   return (
     <div className="install-section">
       <div className="install-section-title">See it in action</div>
-      <div className="platform-description">
-        Configure the agent here in the dashboard and see the deployments jobs
-        status and logs.
-      </div>
+      <iframe
+        title="video"
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
     </div>
   );
 }
