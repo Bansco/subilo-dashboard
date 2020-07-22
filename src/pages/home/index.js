@@ -1,36 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import logoImg from "../../assets/logo.png";
 import { Button } from "antd";
-import { DoubleRightOutlined } from "@ant-design/icons";
+import { Link } from 'react-router-dom';
+import { DoubleRightOutlined, CopyOutlined, CheckCircleOutlined  } from "@ant-design/icons";
 import "./index.css";
-
-const profiles = [
-  {
-    name: "Christian",
-    gh: "gillchristian",
-    link: "https://gillchristian.xyz",
-  },
-  {
-    name: "Jonas",
-    gh: "Jonasjonathan",
-    link: "https://www.behance.net/Jonathanjonas",
-  },
-  {
-    name: "Joni",
-    gh: "jonidelv",
-    link: "https://twitter.com/jonidelv",
-  },
-  {
-    name: "Mati",
-    gh: "matiastucci",
-    link: "https://github.com/matiastucci",
-  },
-  {
-    name: "Nico",
-    gh: "ndelvalle",
-    link: "https://github.com/ndelvalle",
-  },
-];
 
 function Home() {
   return (
@@ -38,30 +11,26 @@ function Home() {
       <div className="title-section">
         <section className="presentation">
           <img className="logo" src={logoImg} width={50} alt="logo" />
-          {/* <h1 className="title">
-            <strong>Best Platform</strong>
-            <br />
-            to develop your works
-          </h1> */}
           <h1 className="title">
             <strong>Subilo</strong>
           </h1>
           <div className="title-description">
-            Tiny continuous deployment agent 
+            Tiny continuous deployment agent
           </div>
-          <Button
-            type="primary"
-            className="see-demo-button"
-            onClick={() => {
-              window.location.href = "/agents";
-            }}
-          >
-            See Demo
-          </Button>
           <div className="presentation-description">
             Subilo improves the deployment process for projects where normal
             CI's cannot reach, like IoT devices and VPS not attached to an
             orchestration service.
+          </div>
+          <div className="hero-buttons">
+            <Link to="/jobs">
+              <Button
+                type="primary"
+                className="see-demo-button"
+              >
+                See Demo
+              </Button>
+            </Link>
           </div>
           <DoubleRightOutlined
             className="icon-down-arrow"
@@ -79,11 +48,9 @@ function Home() {
           How it works
         </div>
         <div className="platform-description">
-          Subilo It's a small server that listens on a specified port for HTTP
-          requests (the port should be open to the internet). It exposes a
-          /webhook endpoint that receives a project name that is matched against
-          the Subilo configuration file (.subilorc) to check what commands
-          should be run.
+          Subilo it's a small server that listens on a specified port for HTTP
+          requests. It exposes a <div className="code-word">/webhook</div> endpoint that receives a project name that is matched against
+          the Subilo configuration file to check what commands should run.
         </div>
         <div className="platform-description">
           Useful to deploy projects running on a private server where a normal
@@ -91,9 +58,35 @@ function Home() {
           and your project will be deployed.
         </div>
       </div>
-      <div className="install-section">
-        <div className="install-section-title">Install and Setup</div>
-        <div className="install-section-subtitle">Install Script</div>
+
+      <InstallScript />
+      <Footer />
+
+    </div>
+  );
+}
+
+function InstallScript() {
+  const [ copyStatus, setCopyStatus ] = useState('copy')
+
+  function copyToClipboard() {
+    const command = 'curl -s -L https://raw.githubusercontent.com/Huemul/subilo/master/install.sh | bash'
+    const txtArea = document.createElement('textarea');
+    txtArea.innerHTML = command;
+    document.body.appendChild(txtArea);
+    txtArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(txtArea);
+
+    setCopyStatus('copied')
+
+    setTimeout(() => setCopyStatus('copy'), 1200)
+  }
+
+  return (
+    <div className="install-section">
+      <div className="install-section-title">Install</div>
+      <div className="install-script">
         <div className="code-block">
           <pre>
             <code>
@@ -103,33 +96,62 @@ function Home() {
             </code>
           </pre>
         </div>
-        <div className="install-description">
-          This command runs the install script. The script downloads the latest
-          Subilo release and attempts to add the Subilo bin path to the $PATH
-          variable in the correct profile file (~/.profile, ~/.bashrc,
-          ~/.bash_profile, ~/.zshrc or ~/.config/fish/config.fish)
-        </div>
-      </div>
-      <div className="footer">
-        <span>by</span>
-        <div className="avatars">
-          {profiles.map(({ gh, link, name }) => (
-            <a href={link} rel="noopener noreferrer" target="_blank">
-              <img
-                key={name}
-                src={`https://github.com/${gh}.png?size=60`}
-                width="30"
-                alt={name}
-              />
-            </a>
-          ))}
-        </div>
-        <span>
-          <span className="icon">©</span> {new Date().getFullYear()}
-        </span>
+        { copyStatus === 'copy' && <CopyOutlined onClick={copyToClipboard} className="copy-icon" />}
+        { copyStatus === 'copied' && <CheckCircleOutlined className="copy-icon" />}
       </div>
     </div>
-  );
+  )
+}
+
+function Footer() {
+  const profiles = [
+    {
+      name: "Christian",
+      gh: "gillchristian",
+      link: "https://gillchristian.xyz",
+    },
+    {
+      name: "Jonas",
+      gh: "Jonasjonathan",
+      link: "https://www.behance.net/Jonathanjonas",
+    },
+    {
+      name: "Joni",
+      gh: "jonidelv",
+      link: "https://twitter.com/jonidelv",
+    },
+    {
+      name: "Mati",
+      gh: "matiastucci",
+      link: "https://github.com/matiastucci",
+    },
+    {
+      name: "Nico",
+      gh: "ndelvalle",
+      link: "https://github.com/ndelvalle",
+    },
+  ];
+
+  return (
+    <div className="footer">
+      <span>by</span>
+      <div className="avatars">
+        {profiles.map(({ gh, link, name }) => (
+          <a href={link} rel="noopener noreferrer" target="_blank">
+            <img
+              key={name}
+              src={`https://github.com/${gh}.png?size=60`}
+              width="30"
+              alt={name}
+            />
+          </a>
+        ))}
+      </div>
+      <span>
+        <span className="icon">©</span> {new Date().getFullYear()}
+      </span>
+    </div>
+  )
 }
 
 export default Home;

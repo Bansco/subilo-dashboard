@@ -25,7 +25,6 @@
 
 .home strong {
   font-size: 42px;
-  font-family: "SpaceMono-Bold";
   position: relative;
   top: 15px;
 }
@@ -35,8 +34,19 @@
   margin-top: 30px;
 }
 
-.home .see-demo-button {
-  margin-top: 30px;
+.home .hero-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.home .hero-buttons button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45px;
+  font-size: 1.2em;
 }
 
 .home .presentation-description {
@@ -77,12 +87,31 @@
   max-width: 750px;
   margin: auto;
   position: relative;
+  margin-bottom: 90px;
+}
+
+.home .install-section .install-script {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home .install-section .install-script .copy-icon {
+  margin-left: 5px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  font-size: 25px;
+}
+
+.home .install-section .install-script .copy-icon:hover {
+  opacity: .7;
 }
 
 .home .install-section-title {
   font-size: 38px;
   color: #177ddc;
   margin-top: 90px;
+  margin-bottom: 30px;
 }
 
 .home .install-section-subtitle {
@@ -90,12 +119,20 @@
   color: white;
 }
 
+.home .code-word {
+  display: inline;
+  padding: 0 5px;
+  background: #252424;
+  border-radius: 3px;
+  box-shadow: 0 2px 0 rgb(76 74 74);
+}
+
 .home .code-block {
   padding: 10px;
   background: #252424;
   border-radius: 3px;
-  margin-top: 30px;
   box-shadow: 0 2px 0 rgb(76 74 74);
+  flex: 1;
 }
 
 .home .code-block pre {
