@@ -148,7 +148,7 @@ function Footer() {
         ))}
       </div>
       <span>
-        <span className="icon">©</span> {new Date().getFullYear()}
+        © {new Date().getFullYear()}
       </span>
     </div>
   )

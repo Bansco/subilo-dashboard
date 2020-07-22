@@ -167,6 +167,7 @@
 
 .home .avatars {
   display: flex;
+  margin-right: 5px;
 }
 
 .home .avatars a {
