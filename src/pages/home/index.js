@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import logoImg from "../../assets/logo.png";
+import React from "react";
 import { Button } from "antd";
-import { Link } from 'react-router-dom';
-import { DoubleRightOutlined, CopyOutlined, CheckCircleOutlined  } from "@ant-design/icons";
+import { Link } from "react-router-dom";
+import { DoubleRightOutlined } from "@ant-design/icons";
+
+import logoImg from "../../assets/logo.png";
 import "./index.css";
 
 function Home() {
@@ -14,20 +15,18 @@ function Home() {
           <h1 className="title">
             <strong>Subilo</strong>
           </h1>
-          <div className="title-description">
-            Tiny continuous deployment agent
-          </div>
+          <div className="title-description">Deployment automation agent</div>
           <div className="presentation-description">
-            Subilo improves the deployment process for projects where normal
-            CI's cannot reach, like IoT devices and VPS not attached to an
-            orchestration service.
+            Subilo is a tool to setup continuous deployments for applications
+            running on machines with no external integrations like IoT devices
+            and VPSs.
+            <br />
+            Filling this gap you can enjoy automated deployments and a cool
+            dashboard to check what is going on!
           </div>
           <div className="hero-buttons">
             <Link to="/jobs">
-              <Button
-                type="primary"
-                className="see-demo-button"
-              >
+              <Button type="primary" className="see-demo-button">
                 See Demo
               </Button>
             </Link>
@@ -48,59 +47,39 @@ function Home() {
           How it works
         </div>
         <div className="platform-description">
-          Subilo it's a small server that listens on a specified port for HTTP
-          requests. It exposes a <div className="code-word">/webhook</div> endpoint that receives a project name that is matched against
-          the Subilo configuration file to check what commands should run.
+          Subilo is a small server that listens on a <code>/webhook</code>{" "}
+          endpoint for HTTP calls to trigger a deployment job for a project. The
+          status and logs of those jobs can be easily checked here in the
+          Dashboard.
         </div>
         <div className="platform-description">
-          Useful to deploy projects running on a private server where a normal
-          CI does not have access to. Just push a webhook after the CI finishes
-          and your project will be deployed.
+          Useful to deploy projects running on a private server where CI does
+          not have access to. Just push an event to the webhook after the CI
+          finishes and your project will be deployed.
         </div>
       </div>
 
-      <InstallScript />
+      <SeeItInAction />
       <Footer />
-
     </div>
   );
 }
 
-function InstallScript() {
-  const [ copyStatus, setCopyStatus ] = useState('copy')
-
-  function copyToClipboard() {
-    const command = 'curl -s -L https://raw.githubusercontent.com/Huemul/subilo/master/install.sh | bash'
-    const txtArea = document.createElement('textarea');
-    txtArea.innerHTML = command;
-    document.body.appendChild(txtArea);
-    txtArea.select();
-    document.execCommand('copy');
-    document.body.removeChild(txtArea);
-
-    setCopyStatus('copied')
-
-    setTimeout(() => setCopyStatus('copy'), 1200)
-  }
-
+function SeeItInAction() {
   return (
     <div className="install-section">
-      <div className="install-section-title">Install</div>
-      <div className="install-script">
-        <div className="code-block">
-          <pre>
-            <code>
-              curl -s -L
-              https://raw.githubusercontent.com/Huemul/subilo/master/install.sh
-              | bash
-            </code>
-          </pre>
-        </div>
-        { copyStatus === 'copy' && <CopyOutlined onClick={copyToClipboard} className="copy-icon" />}
-        { copyStatus === 'copied' && <CheckCircleOutlined className="copy-icon" />}
-      </div>
+      <div className="install-section-title">See it in action</div>
+      <iframe
+        title="video"
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
     </div>
-  )
+  );
 }
 
 function Footer() {
@@ -147,11 +126,9 @@ function Footer() {
           </a>
         ))}
       </div>
-      <span>
-        © {new Date().getFullYear()}
-      </span>
+      <span>© {new Date().getFullYear()}</span>
     </div>
-  )
+  );
 }
 
 export default Home;
