@@ -207,7 +207,7 @@ function NoAgents() {
 function getJobName (id) {
   const DATE_LENGTH = 20
 
-  const [year, month, day, _, hour, minute, second] = id.split('')
+  const [year, month, day, , hour, minute, second] = id.split('')
     .splice(-DATE_LENGTH)
     .join('')
     .split('-');
@@ -217,7 +217,7 @@ function getJobName (id) {
     .splice(DATE_LENGTH)
     .reverse()
     .join('')
-    .slice(0, -1); // Remove last underscore from job name 
+    .slice(0, -1); // Remove last underscore from job name
 
   const timestamp = Date.UTC(year, month, day, hour, minute, second)
   const date = new Date(timestamp)

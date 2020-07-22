@@ -25,7 +25,7 @@ export default function CustomHeader(props) {
   <div className="logo">
     <Link to="/">
       <img src={logoImg} width={30} alt="logo" />
-      <h2>SUBILO</h2>
+      <h2>Subilo</h2>
     </Link>
   </div>
     <Menu mode="horizontal" selectedKeys={[selectedKeys]} className="menu-navigation">
