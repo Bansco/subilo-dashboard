@@ -60,7 +60,7 @@ function Home() {
           </Button>
           <div className="presentation-description">
             Subilo improves the deployment process for projects where normal
-            CI's can not reach, like IoT devices and VPS not attached to an
+            CI's cannot reach, like IoT devices and VPS not attached to an
             orchestration service.
           </div>
           <DoubleRightOutlined
