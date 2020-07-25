@@ -47,7 +47,7 @@ function Home() {
           How it works
         </div>
         <div className="platform-description">
-          Subilo is a small server that lives on your projects' machine and
+          Subilo is a small server that lives on your app's machine and
           listens for authenticated HTTP webhooks.
           These webhooks have information about what project should be deployed
           matching the Subilo configuration file (<code>.subilorc</code>).
