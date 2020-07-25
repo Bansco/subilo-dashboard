@@ -51,9 +51,12 @@ function Home() {
           listens for authenticated HTTP webhooks.
           These webhooks have information about what project should be deployed
           matching the Subilo configuration file (<code>.subilorc</code>).
-          The Subilo configuration file also defines what steps should be taken
+          This configuration file also defines what steps should be taken
           to successfully deploy a project, for example: 
           <code>git pull</code>, <code>./restart-server</code> and <code>./notify</code>.
+
+          <br />
+          <br />
           Status and logs of these deployments can be checked in the Dashboard
           using the URL and authentication token provided by the Subilo agent.
         </div>
