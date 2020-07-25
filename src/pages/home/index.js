@@ -47,15 +47,18 @@ function Home() {
           How it works
         </div>
         <div className="platform-description">
-          Subilo is a small server that listens on a <code>/webhook</code>{" "}
-          endpoint for HTTP calls to trigger a deployment job for a project. The
-          status and logs of those jobs can be easily checked here in the
-          Dashboard.
-        </div>
-        <div className="platform-description">
-          Useful to deploy projects running on a private server where CI does
-          not have access to. Just push an event to the webhook after the CI
-          finishes and your project will be deployed.
+          Subilo is a small server that lives on your app's machine and
+          listens for authenticated HTTP webhooks.
+          These webhooks have information about what project should be deployed
+          matching the Subilo configuration file (<code>.subilorc</code>).
+          This configuration file also defines what steps should be taken
+          to successfully deploy a project, for example: 
+          <code>git pull</code>, <code>./restart-server</code> and <code>./notify</code>.
+
+          <br />
+          <br />
+          Status and logs of these deployments can be checked in the Dashboard
+          using the URL and authentication token provided by the Subilo agent.
         </div>
       </div>
 
