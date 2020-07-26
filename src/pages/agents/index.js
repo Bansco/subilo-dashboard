@@ -81,8 +81,8 @@ export default function Agents() {
                 onSubmit({
                   name: 'Demo Agent',
                   token:
-                    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aHJlc2g6YWdlbnQiLCJjb21wYW55IjoidGhyZXNoIiwiZXhwIjoxMDAwMDAwMDAwMH0.by-P7_YTCqt0d6gL0Xexlmhr1PgyXhE5PRicroWaKyYTYT0yMJnfxvVxwOYQr5QhL89YQHKUS2-XDswNPuglAQ',
-                  url: 'https://tsearch.xyz/threshtest',
+                    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1OTgzNzk5OTQsImlhdCI6MTU5NTc1MTk5NCwiaXNzIjoic3ViaWxvOmFnZW50IiwidXNlciI6eyJwZXJtaXNzaW9ucyI6WyJqb2I6d3JpdGUiXX19.njX62DJqol0BOT26t4V4LrOa7qg5rhXYrPpqeS5tlX_GbNoifu1i9lSXKodcoQgO31px6CG1ZKClgqpYhmqOpg',
+                  url: 'https://tsearch.xyz/subilo-demo',
                 })
               }
             >
@@ -221,12 +221,10 @@ function AgentDetail({ id, isVisible, onSubmit, onClose }) {
             textAlign: 'left',
           }}
         >
-          <Button onClick={onClose} style={{ marginRight: 8 }}>
-            Cancel
-          </Button>
-          <Button onClick={saveAgent} type="primary">
+          <Button onClick={saveAgent} type="primary" style={{ marginRight: 8 }}>
             Submit
           </Button>
+          <Button onClick={onClose}>Cancel</Button>
         </div>
       }
     >
