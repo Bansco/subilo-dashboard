@@ -47,8 +47,6 @@ function Home() {
           How it works
         </div>
         <div className="platform-description">
-          Status and logs of these deployments can be checked in the Dashboard
-          using the URL and authentication token provided by the Subilo agent.
           The Subilo agent is a small server that lives on your application's
           machine and listens for secure HTTP webhooks.
         </div>
