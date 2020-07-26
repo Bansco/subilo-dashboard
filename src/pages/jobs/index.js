@@ -30,7 +30,7 @@ export default function Jobs() {
   return (
     <Layout className="jobs-section">
       {!emptyAgents && (
-        <Layout.Sider width={320} className="site-layout-background">
+        <Layout.Sider width={370} className="site-layout-background">
           <Menu
             mode="inline"
             className="jobs-list"
@@ -242,7 +242,7 @@ function getFormattedJobDate(id) {
   )
 
   const timestamp = Date.UTC(year, month, day, hour, minute, second)
-  return new Date(timestamp).toLocaleString()
+  return `${new Date(timestamp).toLocaleString()} (UTC)`
 }
 
 function projectNameFromJobId(id) {
