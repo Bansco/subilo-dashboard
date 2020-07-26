@@ -25,7 +25,7 @@ function Home() {
             dashboard to check what is going on!
           </div>
           <div className="hero-buttons">
-            <Link to="/agents">
+            <Link to="/jobs">
               <Button type="primary" className="see-demo-button">
                 See Demo
               </Button>
