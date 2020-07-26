@@ -25,7 +25,7 @@ function Home() {
             dashboard to check what is going on!
           </div>
           <div className="hero-buttons">
-            <Link to="/jobs">
+            <Link to="/agents">
               <Button type="primary" className="see-demo-button">
                 See Demo
               </Button>
@@ -80,20 +80,20 @@ function GetStarted() {
       <div className="install-section-title">Get started</div>
       <div className="platform-description">
         Follow the installation and usage guide in{' '}
-        <a href="/agents">github.com/Huemul/subilo</a> to run Subilo and start
-        deploying your applications.
+        <a href="https://github.com/Huemul/subilo">github.com/Huemul/subilo</a>{' '}
+        to run Subilo and start deploying your applications.
       </div>
 
       <div className="platform-description">
-        <Link
-          to="https://github.com/Huemul/subilo"
+        <a
+          href="https://github.com/Huemul/subilo#subilo"
           target="_blank"
           rel="noopener noreferrer"
         >
           <Button type="primary" className="see-demo-button">
             Get started
           </Button>
-        </Link>
+        </a>
       </div>
     </div>
   )
