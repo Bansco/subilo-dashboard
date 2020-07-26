@@ -101,10 +101,12 @@ function AgentSubMenu({ agent, ...rest }) {
       {logs.length &&
         logs
           .slice(0)
-          .sort((a, b) => (a < b ? 1 : -1))
+          .sort(byDateDesc)
           .map(log => (
             <Menu.Item key={`${agent.id}-${log}`} icon={<CodeOutlined />}>
-              <Link to={`/jobs/${agent.id}/${log}`}>{getJobName(log)}</Link>
+              <Link to={`/jobs/${agent.id}/${log}`} title={log}>
+                {getJobName(log)}
+              </Link>
             </Menu.Item>
           ))}
 
@@ -215,25 +217,35 @@ function NoAgents() {
   )
 }
 
+const DATE_LENGTH = 20
+
 function getJobName(id) {
-  const DATE_LENGTH = 20
+  const [year, month, day, , hour, minute, second] = jobDateFromId(id).split(
+    '-',
+  )
 
-  const [year, month, day, , hour, minute, second] = id
-    .split('')
-    .splice(-DATE_LENGTH)
-    .join('')
-    .split('-')
-
-  const name = id
-    .split('')
-    .reverse()
-    .splice(DATE_LENGTH)
-    .reverse()
-    .join('')
-    .slice(0, -1) // Remove last underscore from job name
+  const name = jobNameFromId(id)
 
   const timestamp = Date.UTC(year, month, day, hour, minute, second)
   const date = new Date(timestamp)
 
   return `${name} ${date}`
+}
+
+function jobNameFromId(id) {
+  return id
+    .split('')
+    .reverse()
+    .splice(DATE_LENGTH)
+    .reverse()
+    .join('')
+    .replace(/_$/, '')
+}
+
+function jobDateFromId(id) {
+  return id.split('').splice(-DATE_LENGTH).join('')
+}
+
+function byDateDesc(a, b) {
+  return jobDateFromId(a) < jobDateFromId(b) ? 1 : -1
 }
