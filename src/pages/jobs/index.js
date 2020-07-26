@@ -9,6 +9,7 @@ import {
   WarningOutlined,
   CheckCircleOutlined,
   SyncOutlined,
+  DatabaseOutlined,
 } from '@ant-design/icons'
 import { useRecoilValue } from 'recoil'
 import { agentsState, getAgent } from '../../store'
@@ -91,6 +92,10 @@ function AgentSubMenu({ agent, ...rest }) {
     )
   }
 
+  const projects = Object.entries(
+    groupBy(projectNameFromJobId, logs.slice(0).sort(byDateDesc)),
+  )
+
   return (
     <Menu.SubMenu
       {...rest}
@@ -98,23 +103,33 @@ function AgentSubMenu({ agent, ...rest }) {
       icon={<DesktopOutlined />}
       title={agent.name}
     >
-      {logs.length &&
-        logs
-          .slice(0)
-          .sort(byDateDesc)
-          .map(log => (
-            <Menu.Item key={`${agent.id}-${log}`} icon={<CodeOutlined />}>
-              <Link to={`/jobs/${agent.id}/${log}`} title={log}>
-                {getJobName(log)}
-              </Link>
-            </Menu.Item>
-          ))}
-
-      {!logs.length && (
-        <Menu.Item key={`${agent.id}-no-logs`} icon={<CodeOutlined />}>
-          No Logs
-        </Menu.Item>
-      )}
+      {
+        // If there are projects, each will have at least one log (because of grogroupBy)
+        projects.length ? (
+          projects.map(([project, logs]) => (
+            <Menu.SubMenu
+              key={`${agent.id}-${project}`}
+              icon={<DatabaseOutlined />}
+              title={project}
+            >
+              {logs.map(log => (
+                <Menu.Item
+                  key={`${agent.id}-${project}-${log}`}
+                  icon={<CodeOutlined />}
+                >
+                  <Link to={`/jobs/${agent.id}/${log}`} title={log}>
+                    {getFormattedJobDate(log)}
+                  </Link>
+                </Menu.Item>
+              ))}
+            </Menu.SubMenu>
+          ))
+        ) : (
+          <Menu.Item key={`${agent.id}-no-logs`} icon={<CodeOutlined />}>
+            No Logs
+          </Menu.Item>
+        )
+      }
     </Menu.SubMenu>
   )
 }
@@ -219,33 +234,42 @@ function NoAgents() {
 
 const DATE_LENGTH = 20
 
-function getJobName(id) {
+function getFormattedJobDate(id) {
   const [year, month, day, , hour, minute, second] = jobDateFromId(id).split(
     '-',
   )
 
-  const name = jobNameFromId(id)
-
   const timestamp = Date.UTC(year, month, day, hour, minute, second)
-  const date = new Date(timestamp)
-
-  return `${name} ${date}`
+  return new Date(timestamp).toString()
 }
 
-function jobNameFromId(id) {
+function projectNameFromJobId(id) {
   return id
     .split('')
     .reverse()
-    .splice(DATE_LENGTH)
+    .slice(DATE_LENGTH)
     .reverse()
     .join('')
     .replace(/_$/, '')
 }
 
 function jobDateFromId(id) {
-  return id.split('').splice(-DATE_LENGTH).join('')
+  return id.split('').slice(-DATE_LENGTH).join('')
 }
 
 function byDateDesc(a, b) {
   return jobDateFromId(a) < jobDateFromId(b) ? 1 : -1
+}
+
+function groupBy(by, xs) {
+  return xs.reduce((acc, x) => {
+    const key = by(x)
+    if (acc[key]) {
+      acc[key].push(x)
+    } else {
+      acc[key] = [x]
+    }
+
+    return acc
+  }, {})
 }
