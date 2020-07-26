@@ -8,116 +8,106 @@ import {
   Drawer,
   Form,
   Input,
-  Popconfirm
-} from 'antd';
-import {
-  useParams
-} from "react-router-dom";
-import {
-  EditOutlined,
-  DeleteOutlined,
-  PlusOutlined
-} from '@ant-design/icons';
-import {
-  useRecoilValue,
-  useSetRecoilState
- } from 'recoil';
-import {
-  agentsState,
-  getAgent,
-  setSavedAgents
-} from '../../store'
+  Popconfirm,
+} from 'antd'
+import { useParams } from 'react-router-dom'
+import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { agentsState, getAgent, setSavedAgents } from '../../store'
 
-import './index.css';
+import './index.css'
 
 export default function Agents() {
-  const { id } = useParams();
-  const [isAgentDetailVisible, setIsAgentDetailVisible] = useState(!!id);
-  const [selectedID, setSelectedID] = useState(id);
-  const agents = useRecoilValue(agentsState);
+  const { id } = useParams()
+  const [isAgentDetailVisible, setIsAgentDetailVisible] = useState(!!id)
+  const [selectedID, setSelectedID] = useState(id)
+  const agents = useRecoilValue(agentsState)
   const setAgents = useSetRecoilState(agentsState)
 
   useEffect(() => {
     if (selectedID) {
-      setIsAgentDetailVisible(true);
+      setIsAgentDetailVisible(true)
     }
   }, [selectedID])
 
   function onSubmit(agentToSave) {
-    setAgents((oldAgents) => {
+    setAgents(oldAgents => {
       if (agentToSave.id) {
         const updatedAgents = oldAgents.map(agent => {
           if (agent.id === agentToSave.id) {
             return agentToSave
           }
-          return agent;
+          return agent
         })
-        setSavedAgents(updatedAgents);
-        return updatedAgents;
+        setSavedAgents(updatedAgents)
+        return updatedAgents
       }
 
       const withNewAgent = [
         ...oldAgents,
         {
           ...agentToSave,
-          id: getRandomID()
-        }
+          id: getRandomID(),
+        },
       ]
-      setSavedAgents(withNewAgent);
-      return withNewAgent;
+      setSavedAgents(withNewAgent)
+      return withNewAgent
     })
-    hideAgentDetail();
+    hideAgentDetail()
   }
 
   function onDeleteAgent(agentID) {
-    setAgents((oldAgents) => {
-      const updatedAgents = oldAgents.filter(agent => agent.id !== agentID);
-      setSavedAgents(updatedAgents);
-      return updatedAgents;
+    setAgents(oldAgents => {
+      const updatedAgents = oldAgents.filter(agent => agent.id !== agentID)
+      setSavedAgents(updatedAgents)
+      return updatedAgents
     })
   }
 
   function hideAgentDetail() {
-    setIsAgentDetailVisible(false);
-    setSelectedID(null);
+    setIsAgentDetailVisible(false)
+    setSelectedID(null)
   }
 
   return (
     <Layout className="agents-section">
       <Layout.Content>
-      <div className="section-actions">
-        {agents && !agents.length && (
+        <div className="section-actions">
+          {agents && !agents.length && (
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={() =>
+                onSubmit({
+                  name: 'Demo Agent',
+                  token:
+                    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aHJlc2g6YWdlbnQiLCJjb21wYW55IjoidGhyZXNoIiwiZXhwIjoxMDAwMDAwMDAwMH0.by-P7_YTCqt0d6gL0Xexlmhr1PgyXhE5PRicroWaKyYTYT0yMJnfxvVxwOYQr5QhL89YQHKUS2-XDswNPuglAQ',
+                  url: 'https://tsearch.xyz/threshtest',
+                })
+              }
+            >
+              Demo Agent
+            </Button>
+          )}
           <Button
             type="primary"
             icon={<PlusOutlined />}
-            onClick={() => onSubmit({
-              name: 'Demo Agent',
-              token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aHJlc2g6YWdlbnQiLCJjb21wYW55IjoidGhyZXNoIiwiZXhwIjoxMDAwMDAwMDAwMH0.by-P7_YTCqt0d6gL0Xexlmhr1PgyXhE5PRicroWaKyYTYT0yMJnfxvVxwOYQr5QhL89YQHKUS2-XDswNPuglAQ',
-              url: 'https://tsearch.xyz/threshtest'
-            })}
+            onClick={() => setIsAgentDetailVisible(true)}
           >
-            Demo Agent
+            Agent
           </Button>
-        )}
-        <Button
-          type="primary"
-          icon={<PlusOutlined />}
-          onClick={() => setIsAgentDetailVisible(true)}
-        >
-          Agent
-        </Button>
-      </div>
-      <AgentsList
-        agents={agents}
-        setSelectedID={setSelectedID}
-        onDeleteAgent={onDeleteAgent}
-      />
-      <AgentDetail
-        id={selectedID}
-        isVisible={isAgentDetailVisible}
-        onSubmit={onSubmit}
-        onClose={hideAgentDetail}
-      />
+        </div>
+        <AgentsList
+          agents={agents}
+          setSelectedID={setSelectedID}
+          onDeleteAgent={onDeleteAgent}
+        />
+        <AgentDetail
+          id={selectedID}
+          isVisible={isAgentDetailVisible}
+          onSubmit={onSubmit}
+          onClose={hideAgentDetail}
+        />
       </Layout.Content>
     </Layout>
   )
@@ -147,12 +137,12 @@ function AgentsList({ agents, setSelectedID, onDeleteAgent }) {
       render: status => (
         <>
           {status.map(tag => {
-            const color = tag === 'online' ? 'green' : 'red';
+            const color = tag === 'online' ? 'green' : 'red'
             return (
               <Tag color={color} key={tag}>
                 {tag.toUpperCase()}
               </Tag>
-            );
+            )
           })}
         </>
       ),
@@ -175,58 +165,48 @@ function AgentsList({ agents, setSelectedID, onDeleteAgent }) {
             okText="Yes"
             cancelText="No"
           >
-          <Button
-            shape="circle"
-            type="primary"
-            icon={<DeleteOutlined />}
-          />
+            <Button shape="circle" type="primary" icon={<DeleteOutlined />} />
           </Popconfirm>
         </Space>
       ),
     },
-  ];
+  ]
 
   const data = agents.map((agent, index) => ({
     key: index,
     id: agent.id,
     name: agent.name,
-    status: ['online']
-  }));
+    status: ['online'],
+  }))
 
-  return (
-    <Table
-      pagination={false}
-      columns={columns}
-      dataSource={data}
-    />
-  )
+  return <Table pagination={false} columns={columns} dataSource={data} />
 }
 
 function AgentDetail({ id, isVisible, onSubmit, onClose }) {
-  const savedAgent = useRecoilValue(getAgent(id));
+  const savedAgent = useRecoilValue(getAgent(id))
   const [form] = Form.useForm()
-  const [agent, setAgent] = useState({});
-  const isCreate = !id;
+  const [agent, setAgent] = useState({})
+  const isCreate = !id
 
   useEffect(() => {
-    form.resetFields();
+    form.resetFields()
   }, [form, isVisible])
 
   function onChange(change) {
     setAgent({
       ...agent,
-      ...change
+      ...change,
     })
   }
 
   function saveAgent() {
     onSubmit({
       ...(savedAgent || {}),
-      ...agent
+      ...agent,
     })
   }
 
-  const title = isCreate ? 'Create new agent' : `Update "${savedAgent.name}"`;
+  const title = isCreate ? 'Create new agent' : `Update "${savedAgent.name}"`
 
   return (
     <Drawer
@@ -238,7 +218,7 @@ function AgentDetail({ id, isVisible, onSubmit, onClose }) {
       footer={
         <div
           style={{
-            textAlign: 'right',
+            textAlign: 'left',
           }}
         >
           <Button onClick={onClose} style={{ marginRight: 8 }}>
@@ -266,7 +246,13 @@ function AgentDetail({ id, isVisible, onSubmit, onClose }) {
         <Form.Item
           label="URL"
           name="url"
-          rules={[{ required: true, type: 'url', message: 'Please, complete the URL' }]}
+          rules={[
+            {
+              required: true,
+              type: 'url',
+              message: 'Please, complete the URL',
+            },
+          ]}
         >
           <Input />
         </Form.Item>
@@ -276,13 +262,13 @@ function AgentDetail({ id, isVisible, onSubmit, onClose }) {
           name="token"
           rules={[{ required: true, message: 'Please, complete the token' }]}
         >
-          <Input addonBefore="Bearer"/>
+          <Input addonBefore="Bearer" />
         </Form.Item>
       </Form>
     </Drawer>
-  );
+  )
 }
 
 function getRandomID() {
-  return `_${Math.random().toString(36).substr(2, 9)}`;
+  return `_${Math.random().toString(36).substr(2, 9)}`
 }
