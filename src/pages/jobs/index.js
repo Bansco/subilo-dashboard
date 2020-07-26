@@ -30,7 +30,7 @@ export default function Jobs() {
   return (
     <Layout className="jobs-section">
       {!emptyAgents && (
-        <Layout.Sider width={300} className="site-layout-background">
+        <Layout.Sider width={320} className="site-layout-background">
           <Menu
             mode="inline"
             className="jobs-list"
@@ -112,16 +112,18 @@ function AgentSubMenu({ agent, ...rest }) {
               icon={<DatabaseOutlined />}
               title={project}
             >
-              {logs.map(log => (
-                <Menu.Item
-                  key={`${agent.id}-${project}-${log}`}
-                  icon={<CodeOutlined />}
-                >
-                  <Link to={`/jobs/${agent.id}/${log}`} title={log}>
-                    {getFormattedJobDate(log)}
-                  </Link>
-                </Menu.Item>
-              ))}
+              {logs
+                .map(log => [log, getFormattedJobDate(log)])
+                .map(([log, date]) => (
+                  <Menu.Item
+                    key={`${agent.id}-${log}`}
+                    icon={<CodeOutlined />}
+                  >
+                    <Link to={`/jobs/${agent.id}/${log}`} title={date}>
+                      {date}
+                    </Link>
+                  </Menu.Item>
+                ))}
             </Menu.SubMenu>
           ))
         ) : (
@@ -240,7 +242,7 @@ function getFormattedJobDate(id) {
   )
 
   const timestamp = Date.UTC(year, month, day, hour, minute, second)
-  return new Date(timestamp).toString()
+  return new Date(timestamp).toLocaleString()
 }
 
 function projectNameFromJobId(id) {
