@@ -52,15 +52,15 @@ function Home() {
         </div>
         <div className="platform-description">
           These webhooks have information about what application to deploy
-          matching the Subilo configuration file (<code>.subilorc</code>). The
+          matching the Subilo configuration file (<code>.subilorc</code>). This
           file also defines what steps should be taken to successfully deploy an
           application, for example: <code>git pull</code> or pull the latest
           Docker image, restart the application and send a notification.
         </div>
 
         <div className="platform-description">
-          Once Subilo is running on your server, you can register it{' '}
-          <a href="/agents">here in the dashboard</a> to see the status and logs
+          Once Subilo is running on your server, you can register it in{' '}
+          <Link to="/jobs">the dashboard</Link> to see the status and logs
           of each deployment.
         </div>
       </div>
