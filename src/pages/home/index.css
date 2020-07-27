@@ -41,12 +41,9 @@
   padding: 30px;
 }
 
-.home .hero-buttons button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.home button {
   height: 45px;
-  font-size: 1.2em;
+  font-size: 20px;
 }
 
 .home .presentation-description {
