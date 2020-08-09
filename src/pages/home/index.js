@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { DoubleRightOutlined } from '@ant-design/icons'
 
 import logoImg from '../../assets/logo.png'
+import howItWorksImg from '../../assets/how-it-works.png'
+import howItWorksMobileImg from '../../assets/how-it-works-mobile.png'
 import './index.css'
 
 function Home() {
@@ -17,12 +19,9 @@ function Home() {
           </h1>
           <div className="title-description">Deployment automation agent</div>
           <div className="presentation-description">
-            Subilo is a tool to setup continuous deployments for applications
-            running on machines with no external integrations like IoT devices
-            and VPSs.
-            <br />
-            Filling this gap you can enjoy automated deployments and a cool
-            dashboard to check what is going on!
+            Subilo lets you automate deployments for applications running VPSs
+            and IoT devices. Enjoy continuous deployments and a cool dashboard
+            to see what is going on!
           </div>
           <div className="hero-buttons">
             <Link to="/jobs">
@@ -47,6 +46,16 @@ function Home() {
           How it works
         </div>
         <div className="platform-description">
+          <div className="how-it-works-img-wrapper">
+            <img className="img large" src={howItWorksImg} alt="how it works" />
+            <img
+              className="img small"
+              src={howItWorksMobileImg}
+              alt="how it works"
+            />
+          </div>
+        </div>
+        <div className="platform-description">
           The Subilo agent is a small server that lives on your application's
           machine and listens for secure HTTP webhooks.
         </div>
@@ -60,8 +69,8 @@ function Home() {
 
         <div className="platform-description">
           Once Subilo is running on your server, you can register it in{' '}
-          <Link to="/jobs">the dashboard</Link> to see the status and logs
-          of each deployment.
+          <Link to="/jobs">the dashboard</Link> to see the status and logs of
+          each deployment.
         </div>
       </div>
 
