@@ -19,9 +19,9 @@ function Home() {
           </h1>
           <div className="title-description">Deployment automation agent</div>
           <div className="presentation-description">
-            Subilo lets you automate deployments for applications running VPSs
-            and IoT devices. Enjoy continuous deployments and a cool dashboard
-            to see what is going on!
+            Subilo lets you automate deployments for applications running on
+            VPSs and IoT devices. Enjoy continuous deployments and a cool
+            dashboard to see what is going on!
           </div>
           <div className="hero-buttons">
             <Link to="/jobs">
