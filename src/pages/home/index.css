@@ -232,7 +232,6 @@
   }
   .how-it-works-img-wrapper .img.small {
     display: block;
-    object-fit: contain;
     max-width: 360px;
   }
 }
