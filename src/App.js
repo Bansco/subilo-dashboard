@@ -6,6 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
+import ReactGA from 'react-ga';
 
 import TopHeader from './components/TopHeader';
 // import Theme from './components/Theme';
@@ -14,6 +15,8 @@ import Jobs from './pages/jobs'
 import Home from './pages/home'
 
 export default function App() {
+  ReactGA.initialize('UA-8293285-16');
+
   return (
     <RecoilRoot>
       {/* using Dark theme for now */}
