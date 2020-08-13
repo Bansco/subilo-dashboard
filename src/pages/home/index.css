@@ -9,6 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 30px;
 }
 
 .home .presentation {
@@ -53,7 +54,7 @@
 
 .home .icon-down-arrow {
   font-size: 40px;
-  margin-top: 100px;
+  margin-top: 80px;
   color: white;
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
@@ -101,7 +102,7 @@
 }
 
 .home .install-section .install-script .copy-icon:hover {
-  opacity: .7;
+  opacity: 0.7;
 }
 
 .home .install-section-title {
@@ -201,4 +202,67 @@
   text-transform: none;
   margin-left: 5px;
   margin-right: 0;
+}
+.how-it-works-img-wrapper {
+  padding: 10px;
+  background-color: white;
+  border-radius: 2px;
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.how-it-works-img-wrapper .img {
+  object-fit: contain;
+  width: 100%;
+}
+
+.how-it-works-img-wrapper .img.large {
+  max-width: 740px;
+}
+.how-it-works-img-wrapper .img.small {
+  display: none;
+}
+@media (max-width: 768px) {
+  .how-it-works-img-wrapper .img.large {
+    display: none;
+  }
+  .how-it-works-img-wrapper .img.small {
+    display: block;
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home {
+    padding: 0 20px;
+  }
+  .home .title-section {
+    height: auto !important;
+    margin-bottom: 30px;
+    padding-top: 50px;
+  }
+  .home .icon-down-arrow {
+    display: none;
+  }
+  .ant-layout-header.header {
+    padding: 0 20px;
+  }
+  .home .footer {
+    padding: 0 20px;
+    background: #1f1f1f;
+    margin-right: -20px;
+    margin-left: -20px;
+  }
+  .ant-menu-item a,
+  .ant-menu-item .anticon {
+    position: relative;
+    top: 4px;
+  }
+  .logo h2 {
+    font-size: 17px;
+  }
 }
