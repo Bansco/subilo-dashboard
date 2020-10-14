@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout, Menu, Skeleton, Empty, Spin, message, Tag } from 'antd'
+import { Layout, Menu, Skeleton, Empty, Spin, message, Tag, Alert } from 'antd'
 import { Link, useParams } from 'react-router-dom'
 import useRequest from '../../util/useRequest'
 import {
@@ -62,7 +62,7 @@ export default function Jobs() {
 }
 
 function AgentSubMenu({ agent, ...rest }) {
-  const { data: logs, error } = useRequest({
+  const { data: jobs, error } = useRequest({
     request: {
       url: `${agent.url}/jobs`,
       headers: {
@@ -84,7 +84,7 @@ function AgentSubMenu({ agent, ...rest }) {
     )
   }
 
-  if (!logs) {
+  if (!jobs) {
     return (
       <div className="skeletons">
         <Skeleton active />
@@ -92,8 +92,8 @@ function AgentSubMenu({ agent, ...rest }) {
     )
   }
 
-  const projects = Object.entries(
-    groupBy(projectNameFromJobId, logs.slice(0).sort(byDateDesc)),
+  const byProjects = Object.entries(
+    groupBy(job => job.project, jobs.slice(0).sort(byDateDesc)),
   )
 
   return (
@@ -105,25 +105,26 @@ function AgentSubMenu({ agent, ...rest }) {
     >
       {
         // If there are projects, each will have at least one log (because of grogroupBy)
-        projects.length ? (
-          projects.map(([project, logs]) => (
+        byProjects.length ? (
+          byProjects.map(([project, logs]) => (
             <Menu.SubMenu
               key={`${agent.id}-${project}`}
               icon={<DatabaseOutlined />}
               title={project}
             >
-              {logs
-                .map(log => [log, getFormattedJobDate(log)])
-                .map(([log, date]) => (
-                  <Menu.Item
-                    key={`${agent.id}-${log}`}
-                    icon={<CodeOutlined />}
+              {logs.map(job => (
+                <Menu.Item
+                  key={`${agent.id}-${job.id}`}
+                  icon={<StatusIcon status={job.status} />}
+                >
+                  <Link
+                    to={`/jobs/${agent.id}/${job.id}`}
+                    title={new Date(job.started_at).toLocaleString()}
                   >
-                    <Link to={`/jobs/${agent.id}/${log}`} title={date}>
-                      {date}
-                    </Link>
-                  </Menu.Item>
-                ))}
+                    {job.started_at}
+                  </Link>
+                </Menu.Item>
+              ))}
             </Menu.SubMenu>
           ))
         ) : (
@@ -139,7 +140,7 @@ function AgentSubMenu({ agent, ...rest }) {
 function LogDetail({ agentID, logID }) {
   const agent = useRecoilValue(getAgent(agentID))
 
-  const { data, error } = useRequest({
+  const { data: job, error: jobError } = useRequest({
     request: {
       url: `${agent.url}/jobs/${logID}`,
       headers: {
@@ -148,34 +149,68 @@ function LogDetail({ agentID, logID }) {
     },
   })
 
-  if (error) {
-    return "Couldn't load logs for this job"
+  const { data: logs, error: logsError } = useRequest({
+    request: {
+      url: `${agent.url}/jobs/${logID}/log`,
+      headers: {
+        Authorization: `Bearer ${agent.token}`,
+      },
+    },
+  })
+
+  if (jobError) {
+    return (
+      <Layout.Content className="job-detail">
+        <div className="center">
+          <Alert type="error" message="Couldn't load job metadata" />
+        </div>
+      </Layout.Content>
+    )
   }
 
   return (
     <Layout.Content className="job-detail">
-      {data && (
+      {job ? (
         <>
-          <JobHeader metadata={data.metadata} />
-          <Layout className="job-code">
-            {data.log.split('\n').map((line, index) => (
-              <Ansi
-                key={index}
-                className={line.startsWith('$ ') ? 'job-command' : ''}
-              >
-                {line}
-              </Ansi>
-            ))}
-          </Layout>
+          <JobHeader metadata={job} />
+          <JobLogs logs={logs} error={logsError} />
         </>
-      )}
-
-      {!data && (
+      ) : (
         <div className="center">
           <Spin indicator={<LoadingOutlined style={{ fontSize: 45 }} spin />} />
         </div>
       )}
     </Layout.Content>
+  )
+}
+
+function JobLogs({ logs, error }) {
+  if (error) {
+    return (
+      <div className="center">
+        <Alert type="error" message="Couldn't load logs for this job" />
+      </div>
+    )
+  }
+
+  if (!logs) {
+    return (
+      <div className="center">
+        <Spin indicator={<LoadingOutlined style={{ fontSize: 45 }} spin />} />
+      </div>
+    )
+  }
+  return (
+    <Layout className="job-code">
+      {logs.split('\n').map((line, index) => (
+        <Ansi
+          key={index}
+          className={line.startsWith('$ ') ? 'job-command' : ''}
+        >
+          {line}
+        </Ansi>
+      ))}
+    </Layout>
   )
 }
 
@@ -200,6 +235,20 @@ function JobHeader({ metadata }) {
       )}
     </div>
   )
+}
+
+function StatusIcon({ status }) {
+  if (status === 'started') {
+    return <SyncOutlined spin className="ant-tag-processing" />
+  } else if (status === 'failed') {
+    // using the colors from tag-error and tag-success because there's
+    // no way to set the color to the icon using the them or by name =/
+    return <WarningOutlined style={{ color: '#d32029' }} />
+  } else if (status === 'succeeded') {
+    return <CheckCircleOutlined style={{ color: '#49aa19' }} />
+  }
+
+  return null
 }
 
 function StatusLabel({ status }) {
@@ -234,33 +283,10 @@ function NoAgents() {
   )
 }
 
-const DATE_LENGTH = 20
-
-function getFormattedJobDate(id) {
-  const [year, month, day, , hour, minute, second] = jobDateFromId(id).split(
-    '-',
-  )
-
-  const timestamp = Date.UTC(year, month, day, hour, minute, second)
-  return `${new Date(timestamp).toLocaleString()} (UTC)`
-}
-
-function projectNameFromJobId(id) {
-  return id
-    .split('')
-    .reverse()
-    .slice(DATE_LENGTH)
-    .reverse()
-    .join('')
-    .replace(/_$/, '')
-}
-
-function jobDateFromId(id) {
-  return id.split('').slice(-DATE_LENGTH).join('')
-}
-
 function byDateDesc(a, b) {
-  return jobDateFromId(a) < jobDateFromId(b) ? 1 : -1
+  return new Date(a.started_at).getTime() < new Date(b.started_at).getTime()
+    ? 1
+    : -1
 }
 
 function groupBy(by, xs) {
