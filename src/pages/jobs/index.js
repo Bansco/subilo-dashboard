@@ -116,7 +116,7 @@ function AgentSubMenu({ agent, ...rest }) {
                 .map((job) => (
                   <Menu.Item
                     key={`${agent.id}-${job.id}`}
-                    icon={<CodeOutlined />}
+                    icon={<StatusIcon status={job.status} />}
                   >
                     <Link to={`/jobs/${agent.id}/${job.id}`} title={new Date(job.started_at).toLocaleString()}>
                       {job.started_at}
@@ -238,6 +238,18 @@ function JobHeader({ metadata }) {
       )}
     </div>
   )
+}
+
+function StatusIcon({ status }) {
+  if (status === 'started') {
+    return <SyncOutlined spin />
+  } else if (status === 'failed') {
+    return <WarningOutlined />
+  } else if (status === 'succeeded') {
+    return <CheckCircleOutlined />
+  }
+
+  return null
 }
 
 function StatusLabel({ status }) {
