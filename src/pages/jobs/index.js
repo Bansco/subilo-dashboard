@@ -112,17 +112,19 @@ function AgentSubMenu({ agent, ...rest }) {
               icon={<DatabaseOutlined />}
               title={project}
             >
-              {logs
-                .map((job) => (
-                  <Menu.Item
-                    key={`${agent.id}-${job.id}`}
-                    icon={<StatusIcon status={job.status} />}
+              {logs.map(job => (
+                <Menu.Item
+                  key={`${agent.id}-${job.id}`}
+                  icon={<StatusIcon status={job.status} />}
+                >
+                  <Link
+                    to={`/jobs/${agent.id}/${job.id}`}
+                    title={new Date(job.started_at).toLocaleString()}
                   >
-                    <Link to={`/jobs/${agent.id}/${job.id}`} title={new Date(job.started_at).toLocaleString()}>
-                      {job.started_at}
-                    </Link>
-                  </Menu.Item>
-                ))}
+                    {job.started_at}
+                  </Link>
+                </Menu.Item>
+              ))}
             </Menu.SubMenu>
           ))
         ) : (
@@ -136,7 +138,7 @@ function AgentSubMenu({ agent, ...rest }) {
 }
 
 function LogDetail({ agentID, logID }) {
-  const agent = useRecoilValue(getAgent(agentID));
+  const agent = useRecoilValue(getAgent(agentID))
 
   const { data: job, error: jobError } = useRequest({
     request: {
@@ -145,7 +147,7 @@ function LogDetail({ agentID, logID }) {
         Authorization: `Bearer ${agent.token}`,
       },
     },
-  });
+  })
 
   const { data: logs, error: logsError } = useRequest({
     request: {
@@ -154,7 +156,7 @@ function LogDetail({ agentID, logID }) {
         Authorization: `Bearer ${agent.token}`,
       },
     },
-  });
+  })
 
   if (jobError) {
     return (
@@ -175,13 +177,11 @@ function LogDetail({ agentID, logID }) {
         </>
       ) : (
         <div className="center">
-          <Spin
-            indicator={<LoadingOutlined style={{ fontSize: 45 }} spin />}
-          />
+          <Spin indicator={<LoadingOutlined style={{ fontSize: 45 }} spin />} />
         </div>
       )}
     </Layout.Content>
-  );
+  )
 }
 
 function JobLogs({ logs, error }) {
@@ -196,18 +196,16 @@ function JobLogs({ logs, error }) {
   if (!logs) {
     return (
       <div className="center">
-        <Spin
-          indicator={<LoadingOutlined style={{ fontSize: 45 }} spin />}
-        />
+        <Spin indicator={<LoadingOutlined style={{ fontSize: 45 }} spin />} />
       </div>
     )
   }
   return (
     <Layout className="job-code">
-      {logs.split("\n").map((line, index) => (
+      {logs.split('\n').map((line, index) => (
         <Ansi
           key={index}
-          className={line.startsWith("$ ") ? "job-command" : ""}
+          className={line.startsWith('$ ') ? 'job-command' : ''}
         >
           {line}
         </Ansi>
@@ -215,7 +213,6 @@ function JobLogs({ logs, error }) {
     </Layout>
   )
 }
-
 
 function JobHeader({ metadata }) {
   const startedAt = new Date(metadata.started_at)
@@ -242,11 +239,13 @@ function JobHeader({ metadata }) {
 
 function StatusIcon({ status }) {
   if (status === 'started') {
-    return <SyncOutlined spin />
+    return <SyncOutlined spin className="ant-tag-processing" />
   } else if (status === 'failed') {
-    return <WarningOutlined />
+    // using the colors from tag-error and tag-success because there's
+    // no way to set the color to the icon using the them or by name =/
+    return <WarningOutlined style={{ color: '#d32029' }} />
   } else if (status === 'succeeded') {
-    return <CheckCircleOutlined />
+    return <CheckCircleOutlined style={{ color: '#49aa19' }} />
   }
 
   return null
@@ -286,7 +285,8 @@ function NoAgents() {
 
 function byDateDesc(a, b) {
   return new Date(a.started_at).getTime() < new Date(b.started_at).getTime()
-    ? 1 : -1
+    ? 1
+    : -1
 }
 
 function groupBy(by, xs) {
