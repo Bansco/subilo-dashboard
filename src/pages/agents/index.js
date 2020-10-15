@@ -81,7 +81,7 @@ export default function Agents() {
                 onSubmit({
                   name: 'Demo Agent',
                   token:
-                    'yJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MDUzMzc2NjIsImlhdCI6MTYwMjcwOTY2MiwiaXNzIjoic3ViaWxvOmFnZW50IiwidXNlciI6eyJwZXJtaXNzaW9ucyI6W119fQ._iA9QOOAOqzKhYclk8R7APNBvcX7TgOxyfQzqqNXSfqP-CiDso_r0ycLGBRWY5FDTgcihrVfuSQJZCVpxw2VXg',
+                    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2MDUzMzc2NjIsImlhdCI6MTYwMjcwOTY2MiwiaXNzIjoic3ViaWxvOmFnZW50IiwidXNlciI6eyJwZXJtaXNzaW9ucyI6W119fQ._iA9QOOAOqzKhYclk8R7APNBvcX7TgOxyfQzqqNXSfqP-CiDso_r0ycLGBRWY5FDTgcihrVfuSQJZCVpxw2VXg',
                   url: 'https://tsearch.xyz/subilo-demo',
                 })
               }
