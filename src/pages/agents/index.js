@@ -81,8 +81,8 @@ export default function Agents() {
                 onSubmit({
                   name: 'Demo Agent',
                   token:
-                    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTcwMzEwNzUsImlhdCI6MTY1NDQwMzA3NSwiaXNzIjoic3ViaWxvOmFnZW50IiwidXNlciI6eyJwZXJtaXNzaW9ucyI6WyJqb2I6d3JpdGUiXX19.UVvfZ64xlWSih8VTYE79_lgTI6q6-UA21btFaw5GePfGqKbcfryakBVGS4kUWyuLhw1-eooWMvv2wjzubm5zHQ',
-                  url: 'https://tsplay.dev/subilo',
+                    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2OTQxOTYwNjUsImlhdCI6MTY2MjY2MDA2NSwiaXNzIjoic3ViaWxvOmFnZW50IiwidXNlciI6eyJwZXJtaXNzaW9ucyI6W119fQ.wPeKMbGQrYm0dEfrOeWK3436Dz1bhXEkHFnzmo_9wU3CgZ_dVtUlCo1V1XieI2Fy8-6k134e7oCSf5o17j5k2w',
+                  url: 'https://subilodemo.botjarvis.xyz',
                 })
               }
             >
